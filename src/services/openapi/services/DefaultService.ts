@@ -4,6 +4,7 @@
 import type { AccessToken } from '../models/AccessToken';
 import type { UserCredentials } from '../models/UserCredentials';
 import type { UserInfo } from '../models/UserInfo';
+import type { VerificationToken } from '../models/VerificationToken';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
@@ -15,19 +16,20 @@ export class DefaultService {
      * Register User
      * Register new account with email & password
      * @param requestBody Email & plaintext password
-     * @returns any Successfully sent verifcation link to user
+     * @returns VerificationToken Successfully sent verification link to user, responds with token
      * @throws ApiError
      */
     public static registerUser(
 requestBody?: UserCredentials,
-): CancelablePromise<any> {
+): CancelablePromise<VerificationToken> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/register',
             body: requestBody,
             mediaType: 'application/json',
             errors: {
-                401: `Error response schema`,
+                400: `Bad Request`,
+                401: `Unauthorized`,
             },
         });
     }
@@ -35,15 +37,21 @@ requestBody?: UserCredentials,
     /**
      * Get User Info
      * Get basic info about registered user
+     * @param authorization Bearer eY..
      * @returns UserInfo 
      * @throws ApiError
      */
-    public static getUser(): CancelablePromise<UserInfo> {
+    public static getUser(
+authorization: string,
+): CancelablePromise<UserInfo> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/user',
+            headers: {
+                'Authorization': authorization,
+            },
             errors: {
-                401: `Error response schema`,
+                401: `Unauthorized`,
             },
         });
     }
@@ -51,21 +59,27 @@ requestBody?: UserCredentials,
     /**
      * Verify user's email
      * Verify user's email
-     * @param secret secret sent in email
+     * @param code verification code from email
+     * @param authorization Bearer eY..
      * @returns void 
      * @throws ApiError
      */
     public static verifyEmail(
-secret?: string,
+code: string,
+authorization: string,
 ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/register/verify',
+            headers: {
+                'Authorization': authorization,
+            },
             query: {
-                'secret': secret,
+                'code': code,
             },
             errors: {
                 401: `Failed to verify`,
+                403: `Forbidden`,
             },
         });
     }
@@ -86,7 +100,8 @@ requestBody?: UserCredentials,
             body: requestBody,
             mediaType: 'application/json',
             errors: {
-                401: `Error response schema`,
+                400: `Bad Request`,
+                401: `Unauthorized`,
             },
         });
     }
