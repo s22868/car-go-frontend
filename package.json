@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "update:openapi": "openapi -i ./api.yaml -o src/services/openapi",
+    "update:openapi": "openapi -i ./api.yaml -o services/openapi",
     "build": "next build",
     "start": "next start"
   },
