@@ -204,6 +204,7 @@ export const sendRequest = async (
         headers,
         body: body ?? formData,
         method: options.method,
+        mode: "no-cors",
         signal: controller.signal,
     };
 

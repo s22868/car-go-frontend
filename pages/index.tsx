@@ -4,14 +4,14 @@ import Link from 'next/link'
 
 const Home: NextPage = () => {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-zinc-400">
       <Head>
         <title>Car-Go</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
+      <main className="flex flex-col items-center justify-center flex-1 w-full px-20 text-center">
         <h1 className='text-5xl'>Car-Go</h1>
-        <div className='flex gap-6 text-xl mt-4 text-blue-500'>
+        <div className='flex gap-6 mt-4 text-xl text-blue-500'>
           <Link className='hover:underline underline-offset-8' href={'/login'}>Logowanie</Link>
           <Link className='hover:underline underline-offset-8' href={'/register'}>Rejestracja</Link>
         </div>
