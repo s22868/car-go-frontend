@@ -1,37 +1,24 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { FormEvent, useEffect, useState } from 'react'
-import { Spinner } from '@components/shared-components'
-import { DefaultService } from '@openapi'
-import { useRouter } from 'next/router'
+import { FormEvent, useState } from 'react'
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const router = useRouter()
 
   const handleLogin = (e: FormEvent) => {
     e.preventDefault()
-    setLoading(true)
-    DefaultService.login({ email, password })
-      .then((res) => console.log(res))
-      .then((res) => router.push('/'))
-      .catch((err) => {
-        console.log(err)
-        setErrorMessage('Błędny email lub hasło, spróbuj jeszcze raz')
-      })
-      .finally(() => setLoading(false))
+    alert('zalogowano :)')
+    console.log(email, password)
   }
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-zinc-400">
+    <div className="flex min-h-screen flex-col items-center justify-center py-2">
       <Head>
         <title>Car-Go - Logowanie</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col items-center justify-center flex-1 w-full gap-4 px-20 text-center">
+      <main className="flex gap-4 w-full flex-1 flex-col items-center justify-center px-20 text-center">
         <h1 className="text-xl">Car-Go Logowanie</h1>
         <form className="flex flex-col gap-3" onSubmit={handleLogin}>
           <label className="flex flex-col items-start">
@@ -42,7 +29,7 @@ const Login: NextPage = () => {
               type="email"
               required
               placeholder="example@ex.com"
-              className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
+              className="border border-gray-300 focus:border-gray-900 rounded-md outline-none px-2 h-10"
             />
           </label>
           <label className="flex flex-col items-start">
@@ -54,26 +41,19 @@ const Login: NextPage = () => {
               required
               type="password"
               placeholder="*****"
-              className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
+              className="border border-gray-300 focus:border-gray-900 rounded-md outline-none px-2 h-10"
             />
           </label>
           <button
-            className="flex items-center justify-center h-10 border border-green-700 rounded-lg"
+            className="h-10 border border-green-700 rounded-lg"
             type="submit"
-            disabled={loading}
           >
-            {loading ? <Spinner /> : 'Zaloguj'}
+            Zaloguj
           </button>
         </form>
-        {errorMessage && <div className="text-red-600">{errorMessage}</div>}
         <div>
-          <p>Nie masz konta?</p>
-          <Link
-            className="text-blue-500 hover:underline underline-offset-4"
-            href="/register"
-          >
-            Zarejestruj się
-          </Link>
+            <p>Nie masz konta?</p>
+            <Link className='text-blue-500 hover:underline underline-offset-4' href="/register">Zarejestruj się</Link>
         </div>
       </main>
     </div>
