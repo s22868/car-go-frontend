@@ -21,6 +21,12 @@ const Home: NextPage = () => {
         {user ? (
           <>
             <div>Zalogowany jako: {String(user.email)}</div>
+            <Link
+              className="my-3 text-blue-500 hover:underline underline-offset-4"
+              href={'/user-settings'}
+            >
+              Ustawienia profilu
+            </Link>
             <button
               className="p-1 transition-colors border border-gray-600 rounded-md hover:text-white bg-slate-300 hover:bg-slate-500"
               onClick={handleLogout}
