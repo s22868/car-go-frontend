@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { FormEvent, useEffect, useState } from 'react'
 import { Spinner } from '@components/shared-components'
-import { DefaultService } from '@openapi'
 import { useRouter } from 'next/router'
 import { UseUser } from 'hooks/useUser'
 
@@ -29,7 +28,7 @@ const Login: NextPage = () => {
   }
 
   useEffect(() => {
-    if(localStorage.getItem('cargo_token')){
+    if (localStorage.getItem('cargo_token')) {
       router.push('/')
     }
   })
