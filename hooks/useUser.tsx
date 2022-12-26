@@ -35,8 +35,13 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   const getUser = async (accessToken?: string) => {
     const token = accessToken || localStorage.getItem('cargo_token')
     const authorization = 'Bearer ' + token
-    const userInfo = await DefaultService.getUser(authorization)
-    setUser(userInfo)
+    try {
+      const userInfo = await DefaultService.getUser(authorization)
+      setUser(userInfo)
+    } catch (_) {
+      setUser(undefined)
+      localStorage.removeItem('cargo_token')
+    }
   }
 
   const logout = () => {
