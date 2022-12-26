@@ -1,20 +1,33 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { FormEvent, useState } from 'react'
+import { useRouter } from 'next/router'
+import { FormEvent, useEffect, useState } from 'react'
 import { DefaultService } from '../../services/openapi'
 
 const Verify: NextPage = () => {
+  const router = useRouter()
+  const [errorMsg, setErrorMsg] = useState('')
   const [code, setCode] = useState('')
-  const authorization = ''
+  const authorization = 'Bearer ' + router.query.token
 
   const handleVerify = (e: FormEvent) => {
     e.preventDefault()
     DefaultService.verifyEmail(code, authorization)
-      .then((res) => {
-        console.log(res)
+      .then((_) => {
+        router.push('/login')
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setErrorMsg('Spróbuj ponownie')
+        console.log(err)
+      })
   }
+
+  useEffect(() => {
+    if(localStorage.getItem('cargo_token')){
+      router.push('/')
+    }
+  },[])
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-zinc-400">
       <Head>
@@ -40,6 +53,7 @@ const Verify: NextPage = () => {
             Zweryfikuj
           </button>
         </form>
+        {errorMsg && <div className="text-red-500">{errorMsg}</div>}
       </main>
     </div>
   )

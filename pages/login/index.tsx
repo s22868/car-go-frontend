@@ -5,26 +5,35 @@ import { FormEvent, useEffect, useState } from 'react'
 import { Spinner } from '@components/shared-components'
 import { DefaultService } from '@openapi'
 import { useRouter } from 'next/router'
+import { UseUser } from 'hooks/useUser'
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const { login } = UseUser()
   const router = useRouter()
 
-  const handleLogin = (e: FormEvent) => {
+  const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    DefaultService.login({ email, password })
-      .then((res) => console.log(res))
-      .then((res) => router.push('/'))
-      .catch((err) => {
-        console.log(err)
-        setErrorMessage('Błędny email lub hasło, spróbuj jeszcze raz')
-      })
-      .finally(() => setLoading(false))
+    try {
+      await login?.(email, password)
+      router.push('/')
+    } catch (_) {
+      setErrorMessage('Błędny email lub hasło, spróbuj jeszcze raz')
+    } finally {
+      setLoading(false)
+    }
   }
+
+  useEffect(() => {
+    if(localStorage.getItem('cargo_token')){
+      router.push('/')
+    }
+  })
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-zinc-400">
       <Head>

@@ -19,13 +19,27 @@ const Register: NextPage = () => {
     setLoading(true)
     if (password !== confirmPassword) {
       setMessage('hasła nie są zgodne :(')
-      return
+      return setLoading(false)
     }
+
     DefaultService.registerUser({ email, password })
-      .then((res) => console.log(res)).then((res) => router.push('/verify'))
-      .catch((err) => console.log(err))
+      .then((res) =>
+        router.push({
+          pathname: '/verify',
+          query: { token: res.verification_token },
+        })
+      )
+      .catch((_) => {
+        setMessage('Nie udało się utworzyć konta')
+      })
       .finally(() => setLoading(false))
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('cargo_token')) {
+      router.push('/')
+    }
+  })
 
   useEffect(() => {
     setMessage('')
@@ -76,10 +90,11 @@ const Register: NextPage = () => {
             />
           </label>
           <button
-            className="h-10 border border-green-700 rounded-lg"
+            className="flex items-center justify-center h-10 border border-green-700 rounded-lg"
             type="submit"
+            disabled={loading}
           >
-            {loading ? <Spinner/> : "Zarejestruj"}
+            {loading ? <Spinner /> : 'Zarejestruj'}
           </button>
         </form>
         {message && <div className="text-red-500">{message}</div>}
