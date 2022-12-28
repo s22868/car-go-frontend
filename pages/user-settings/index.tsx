@@ -4,7 +4,7 @@ import { UseUser } from 'hooks/useUser'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-const Login: NextPage = () => {
+const UserSettings: NextPage = () => {
   const router = useRouter()
   const { user } = UseUser()
 
@@ -57,4 +57,4 @@ const Login: NextPage = () => {
   )
 }
 
-export default Login
+export default UserSettings
