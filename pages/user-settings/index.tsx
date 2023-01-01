@@ -46,7 +46,7 @@ const UserSettings: NextPage = () => {
           <label className="flex flex-col items-start">
             <p>Weryfikacja konta:</p>
             <input
-              value={user?.isVerified ? 'Zweryfikowane' : 'Brak'}
+              value={user?.is_verified ? 'Zweryfikowane' : 'Brak'}
               disabled
               className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
             />

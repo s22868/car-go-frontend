@@ -2,8 +2,11 @@
 /* tslint:disable */
 /* eslint-disable */
 import type { AccessToken } from '../models/AccessToken';
+import type { CarOfferReq } from '../models/CarOfferReq';
+import type { CarOfferRes } from '../models/CarOfferRes';
 import type { UserCredentials } from '../models/UserCredentials';
 import type { UserInfo } from '../models/UserInfo';
+import type { UserProfile } from '../models/UserProfile';
 import type { VerificationToken } from '../models/VerificationToken';
 
 import type { CancelablePromise } from '../core/CancelablePromise';
@@ -102,6 +105,89 @@ requestBody?: UserCredentials,
             errors: {
                 400: `Bad Request`,
                 401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * Update user profile
+     * @param authorization Bearer token
+     * @param requestBody 
+     * @returns any Successfully updated profile
+     * @throws ApiError
+     */
+    public static postUserProfile(
+authorization: string,
+requestBody?: UserProfile,
+): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/user/profile',
+            headers: {
+                'Authorization': authorization,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * Add car offer
+     * Add car offer
+     * @param authorization Bearer token
+     * @param requestBody 
+     * @returns any Created
+     * @throws ApiError
+     */
+    public static postOffersAdd(
+authorization: string,
+requestBody?: CarOfferReq,
+): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/offers',
+            headers: {
+                'Authorization': authorization,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: `Bad Request`,
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * List available cars
+     * List available cars with their info - this is a public endpoint
+     * @param from from datetime utc
+     * @param to to datetime utc
+     * @param city city name
+     * @param features comma separated 'list' of features
+     * @returns CarOfferRes OK
+     * @throws ApiError
+     */
+    public static getOffers(
+from?: string,
+to?: string,
+city?: string,
+features?: string,
+): CancelablePromise<Array<CarOfferRes>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/offers',
+            query: {
+                'from': from,
+                'to': to,
+                'city': city,
+                'features': features,
+            },
+            errors: {
+                400: `Bad Request`,
             },
         });
     }

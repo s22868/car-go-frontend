@@ -8,5 +8,5 @@
 export type UserInfo = {
     id: string;
     email: string;
-    isVerified: boolean;
+    is_verified: boolean;
 };
