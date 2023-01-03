@@ -1,7 +1,6 @@
 import type {
   GetServerSideProps,
   InferGetServerSidePropsType,
-  NextPage,
 } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -33,8 +32,10 @@ const Home = ({
             cargo.<span className="text-brand-red">co</span>
           </p>
           {user ? (
-            <div className='flex flex-col items-end'>
-              <p className='hidden text-xs sm:block text-brand-gray-200'>{user.email}</p>
+            <div className="flex flex-col items-end">
+              <p className="hidden text-xs sm:block text-brand-gray-200">
+                {user.email}
+              </p>
               <button
                 onClick={handleLogout}
                 className="text-brand-red hover:underline"
