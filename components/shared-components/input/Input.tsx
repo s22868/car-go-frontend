@@ -9,7 +9,7 @@ const Input: FC<InputProps> = ({ error, className, ...props }) => {
   return (
     <input
       className={classNames(
-        'text-brand-gray-200 font-medium bg-brand-gray-300 rounded-2xl px-6 h-14 ' +
+        'text-brand-gray-200 font-medium bg-brand-gray-300 rounded-2xl px-6 h-14 outline-none ' +
           className,
         {
           'border border-red-600': error,
