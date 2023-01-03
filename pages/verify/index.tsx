@@ -1,3 +1,5 @@
+import Button from '@components/shared-components/button/Button'
+import Input from '@components/shared-components/input/Input'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -23,35 +25,37 @@ const Verify: NextPage = () => {
   }
 
   useEffect(() => {
-    if(localStorage.getItem('cargo_token')){
+    if (localStorage.getItem('cargo_token')) {
       router.push('/')
     }
-  },[])
+  }, [])
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-zinc-400">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-brand-gray-400">
       <Head>
         <title>Car-Go - Weryfikacja</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col items-center justify-center flex-1 w-full gap-4 px-20 text-center">
-        <h1 className="text-xl">Car-Go Weryfikacja</h1>
-        <form className="flex flex-col gap-3" onSubmit={handleVerify}>
-          <label className="flex flex-col items-start">
-            <p>Kod z maila:</p>
-            <input
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              required
-              className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
-            />
-          </label>
-          <button
-            className="h-10 border border-green-700 rounded-lg"
-            type="submit"
-          >
-            Zweryfikuj
-          </button>
+        <div className="mb-10 space-y-4 md:mb-20">
+          <p className="text-5xl font-semibold text-brand-gray-100">
+            cargo.<span className="text-brand-red">co</span>
+          </p>
+          <p className="text-xl font-medium text-brand-gray-200">
+            car rental app
+          </p>
+        </div>
+        <h1 className="mb-4 text-2xl font-semibold text-brand-gray-100">
+          Weryfikacja
+        </h1>
+        <form className="flex flex-col gap-4 md:gap-6" onSubmit={handleVerify}>
+          <Input
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            required
+            placeholder="Kod z maila"
+          />
+          <Button type="submit">Zweryfikuj</Button>
         </form>
         {errorMsg && <div className="text-red-500">{errorMsg}</div>}
       </main>
