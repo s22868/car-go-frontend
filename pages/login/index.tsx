@@ -46,7 +46,9 @@ const Login: NextPage = () => {
           <p className="text-5xl font-semibold text-brand-gray-100">
             cargo.<span className="text-brand-red">co</span>
           </p>
-          <p className="text-xl font-medium text-brand-gray-200">car rental app</p>
+          <p className="text-xl font-medium text-brand-gray-200">
+            car rental app
+          </p>
         </div>
         <h1 className="mb-8 text-2xl font-semibold md:mb-12 text-brand-gray-100">
           Zaloguj się
@@ -66,7 +68,7 @@ const Login: NextPage = () => {
             minLength={8}
             required
             type="password"
-            placeholder="*****"
+            placeholder="Hasło"
             error={!!errorMessage}
           />
           <Link
