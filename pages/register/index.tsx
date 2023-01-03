@@ -1,4 +1,6 @@
 import { Spinner } from '@components/shared-components'
+import Button from '@components/shared-components/button/Button'
+import Input from '@components/shared-components/input/Input'
 import { DefaultService } from '@openapi'
 import type { NextPage } from 'next'
 import Head from 'next/head'
@@ -46,65 +48,61 @@ const Register: NextPage = () => {
   }, [password, confirmPassword])
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-zinc-400">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-brand-gray-400">
       <Head>
         <title>Car-Go - Rejestracja</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex flex-col items-center justify-center flex-1 w-full gap-4 px-20 text-center">
-        <h1 className="text-xl">Car-Go Rejestracja</h1>
-        <form className="flex flex-col gap-3" onSubmit={handleRegister}>
-          <label className="flex flex-col items-start">
-            <p>E-mail:</p>
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              required
-              placeholder="example@ex.com"
-              className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
-            />
-          </label>
-          <label className="flex flex-col items-start">
-            <p>Hasło:</p>
-            <input
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              minLength={8}
-              required
-              type="password"
-              placeholder="*****"
-              className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
-            />
-          </label>
-          <label className="flex flex-col items-start">
-            <p>Powtórz hasło:</p>
-            <input
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              minLength={8}
-              required
-              type="password"
-              placeholder="*****"
-              className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
-            />
-          </label>
-          <button
-            className="flex items-center justify-center h-10 border border-green-700 rounded-lg"
-            type="submit"
-            disabled={loading}
-          >
-            {loading ? <Spinner /> : 'Zarejestruj'}
-          </button>
+        <div className="mb-10 space-y-4 md:mb-20">
+          <p className="text-5xl font-semibold text-brand-gray-100">
+            cargo.<span className="text-brand-red">co</span>
+          </p>
+          <p className="text-xl font-medium text-brand-gray-200">
+            car rental app
+          </p>
+        </div>
+        <h1 className="mb-8 text-2xl font-semibold md:mb-12 text-brand-gray-100">
+          Stwórz konto
+        </h1>
+        <form
+          className="flex flex-col gap-4 md:gap-6 md:w-[330px]"
+          onSubmit={handleRegister}
+        >
+          <Input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            required
+            placeholder="example@ex.com"
+          />
+          <Input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            minLength={8}
+            required
+            type="password"
+            placeholder="Hasło"
+          />
+          <Input
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            minLength={8}
+            required
+            type="password"
+            placeholder="Powtórz hasło"
+          />
+          <Button type="submit" disabled={loading}>
+            {loading ? <Spinner /> : 'Stwórz konto'}
+          </Button>
         </form>
         {message && <div className="text-red-500">{message}</div>}
-        <div>
-          <p>Masz już konto?</p>
-          <Link
-            className="text-blue-500 hover:underline underline-offset-4"
-            href="/login"
-          >
-            Zaloguj się
+        <div className="flex flex-col w-[249px] md:w-[330px] gap-4 md:gap-8">
+          <hr className="w-full border-2 border-brand-gray-300" />
+          <Link href="/login">
+            <Button className="w-full" variant="secondary">
+              Zaloguj się
+            </Button>
           </Link>
         </div>
       </main>
