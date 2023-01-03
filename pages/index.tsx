@@ -91,7 +91,7 @@ const Home = ({
                 .filter((offer) => offer.point)
                 .map((offer) => ({
                   id: offer.id!,
-                  name: `${offer.make}, ${offer.model} - ${offer.price_per_day}`,
+                  name: `${offer.make}, ${offer.model} - ${offer.price_per_day}PLN/dzień`,
                   position: {
                     lat: Number(offer.point?.lat),
                     lng: Number(offer.point?.lon),
