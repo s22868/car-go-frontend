@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import {
   GoogleMap,
   InfoWindow,
@@ -6,30 +6,18 @@ import {
   useLoadScript,
 } from '@react-google-maps/api'
 
-const markers = [
-  {
-    id: 3333,
-    name: 'Fura1, test',
-    position: { lat: 53, lng: 19 },
-  },
-  {
-    id: 4444,
-    name: 'Fura2, test2',
-    position: { lat: 52, lng: 20 },
-  },
-  {
-    id: 5555,
-    name: 'Fura3, test5',
-    position: { lat: 52, lng: 23 },
-  },
-  {
-    id: 6666,
-    name: 'Fura4, test6',
-    position: { lat: 50, lng: 20 },
-  },
-]
-
-function Map() {
+type MarkerType = {
+  id: string
+  name: string
+  position: {
+    lat: number
+    lng: number
+  }
+}
+interface MapProps {
+  markers: MarkerType[]
+}
+const Map: FC<MapProps> = ({ markers }) => {
   const [activeMarker, setActiveMarker] = useState(null)
   const [reloadMarkers, setReloadMarkers] = useState(false)
 

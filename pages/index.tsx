@@ -1,7 +1,4 @@
-import type {
-  GetServerSideProps,
-  InferGetServerSidePropsType,
-} from 'next'
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { UseUser } from 'hooks/useUser'
@@ -89,7 +86,18 @@ const Home = ({
             ))}
           </div>
           <div className="flex-1 hidden overflow-hidden rounded-lg lg:block">
-            <Map />
+            <Map
+              markers={carOffers
+                .filter((offer) => offer.point)
+                .map((offer) => ({
+                  id: offer.id!,
+                  name: `${offer.make}, ${offer.model} - ${offer.price_per_day}`,
+                  position: {
+                    lat: Number(offer.point?.lat),
+                    lng: Number(offer.point?.lon),
+                  },
+                }))}
+            />
           </div>
         </div>
       </main>
@@ -103,6 +111,7 @@ export const getServerSideProps: GetServerSideProps<{
   carOffers: CarOfferRes[]
 }> = async (context) => {
   const carOffers: CarOfferRes[] = await DefaultService.getOffers()
+  console.log(carOffers)
   return {
     props: {
       carOffers,
