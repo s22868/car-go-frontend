@@ -47,7 +47,7 @@ const Home = ({
           )}
         </div>
         <div className="flex gap-8 h-[90%]">
-          <div className="flex flex-col flex-1 gap-4 p-1 overflow-y-scroll scrollbar-hide">
+          <div className="flex flex-col flex-1 gap-4 p-1">
             <div className="flex justify-between gap-2">
               <Input size={12} placeholder="Lokalizacja" />
               <Input
@@ -75,15 +75,17 @@ const Home = ({
                 Szukaj
               </Button>
             </div>
-            {carOffers.map((offer) => (
-              <ListItem
-                key={offer.id}
-                make={offer.make}
-                model={offer.model}
-                pricePerDay={offer.price_per_day}
-                imgSrc={offer.images[0]?.url || ''}
-              />
-            ))}
+            <div className='flex flex-col gap-4 overflow-y-scroll scrollbar-hide'>
+              {carOffers.map((offer) => (
+                <ListItem
+                  key={offer.id}
+                  make={offer.make}
+                  model={offer.model}
+                  pricePerDay={offer.price_per_day}
+                  imgSrc={offer.images[0]?.url || ''}
+                />
+              ))}
+            </div>
           </div>
           <div className="flex-1 hidden overflow-hidden rounded-lg lg:block">
             <Map
