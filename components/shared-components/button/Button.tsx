@@ -13,11 +13,15 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
 }) => {
   return (
     <button
-      className={classNames('rounded-2xl font-semibold text-center h-14 ' + className, {
-        'bg-brand-red text-white': variant === 'primary',
-        'bg-transparent border border-brand-red text-brand-red':
-          variant === 'secondary',
-      })}
+      className={classNames(
+        'rounded-2xl font-semibold text-center h-14 flex items-center justify-center ' +
+          className,
+        {
+          'bg-brand-red text-white': variant === 'primary',
+          'bg-transparent border border-brand-red text-brand-red':
+            variant === 'secondary',
+        }
+      )}
       {...props}
     >
       {children}
