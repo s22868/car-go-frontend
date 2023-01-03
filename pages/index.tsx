@@ -29,7 +29,7 @@ const Home = ({
       </Head>
       <main className="h-full">
         <div className="flex items-center justify-between mb-8">
-          <p className="text-3xl font-semibold text-brand-gray-100">
+          <p className="text-3xl font-semibold cursor-default text-brand-gray-100">
             cargo.<span className="text-brand-red">co</span>
           </p>
           {user ? (
@@ -60,7 +60,7 @@ const Home = ({
                 make={offer.make}
                 model={offer.model}
                 pricePerDay={offer.price_per_day}
-                imgSrc={offer.images[0].url || ""}
+                imgSrc={offer.images[0]?.url || ""}
               />
             ))}
           </div>
