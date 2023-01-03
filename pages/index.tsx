@@ -60,7 +60,7 @@ const Home = ({
                 make={offer.make}
                 model={offer.model}
                 pricePerDay={offer.price_per_day}
-                imgSrc="https://tesla-cdn.thron.com/delivery/public/image/tesla/5a7b3001-249f-4065-a330-4ea6a17ccf7b/bvlatuR/std/2560x1708/Model-3-Main-Hero-Desktop-LHD"
+                imgSrc={offer.images[0].url || ""}
               />
             ))}
           </div>
