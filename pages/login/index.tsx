@@ -53,7 +53,7 @@ const Login: NextPage = () => {
         <h1 className="mb-8 text-2xl font-semibold md:mb-12 text-brand-gray-100">
           Zaloguj się
         </h1>
-        <form className="flex flex-col gap-4" onSubmit={handleLogin}>
+        <form className="flex flex-col gap-4 md:gap-6 md:w-[330px]" onSubmit={handleLogin}>
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -82,7 +82,7 @@ const Login: NextPage = () => {
           </Button>
         </form>
         {errorMessage && <div className="text-red-600">{errorMessage}</div>}
-        <div className="flex flex-col w-[249px] gap-4 md:gap-8">
+        <div className="flex flex-col w-[249px] md:w-[330px] gap-4 md:gap-8">
           <hr className="w-full border-2 border-brand-gray-300" />
           <Link href="/register">
             <Button className="w-full" variant="secondary">
