@@ -33,12 +33,15 @@ const Home = ({
             cargo.<span className="text-brand-red">co</span>
           </p>
           {user ? (
-            <button
-              onClick={handleLogout}
-              className="text-brand-red hover:underline"
-            >
-              Wyloguj
-            </button>
+            <div className='flex flex-col items-end'>
+              <p className='hidden text-xs sm:block text-brand-gray-200'>{user.email}</p>
+              <button
+                onClick={handleLogout}
+                className="text-brand-red hover:underline"
+              >
+                Wyloguj
+              </button>
+            </div>
           ) : (
             <Link href="/login" className="text-brand-red hover:underline">
               Zaloguj
@@ -49,10 +52,30 @@ const Home = ({
           <div className="flex flex-col flex-1 gap-4 p-1 overflow-y-scroll scrollbar-hide">
             <div className="flex justify-between gap-2">
               <Input size={12} placeholder="Lokalizacja" />
-              <Input size={12} onFocus={(e) => e.target.type='date'} onBlur={(e) => e.target.type = 'text'} placeholder="Data odbioru" className='hidden md:block max-w-[185px]' />
-              <Input size={12} onFocus={(e) => e.target.type='date'} onBlur={(e) => e.target.type = 'text'} placeholder="Data zwrotu" className='hidden md:block max-w-[185px]' />
-              <Button type="button" className='w-[150px] hidden md:block' variant='secondary' >Filtry</Button>
-              <Button type="button" className='w-[150px]'>Szukaj</Button>
+              <Input
+                size={12}
+                onFocus={(e) => (e.target.type = 'date')}
+                onBlur={(e) => (e.target.type = 'text')}
+                placeholder="Data odbioru"
+                className="hidden md:block max-w-[185px]"
+              />
+              <Input
+                size={12}
+                onFocus={(e) => (e.target.type = 'date')}
+                onBlur={(e) => (e.target.type = 'text')}
+                placeholder="Data zwrotu"
+                className="hidden md:block max-w-[185px]"
+              />
+              <Button
+                type="button"
+                className="w-[150px] hidden md:block"
+                variant="secondary"
+              >
+                Filtry
+              </Button>
+              <Button type="button" className="w-[150px]">
+                Szukaj
+              </Button>
             </div>
             {carOffers.map((offer) => (
               <ListItem
@@ -60,7 +83,7 @@ const Home = ({
                 make={offer.make}
                 model={offer.model}
                 pricePerDay={offer.price_per_day}
-                imgSrc={offer.images[0]?.url || ""}
+                imgSrc={offer.images[0]?.url || ''}
               />
             ))}
           </div>
