@@ -15,7 +15,7 @@ type MarkerType = {
   }
 }
 interface MapProps {
-  markers: MarkerType[]
+  markers?: MarkerType[]
 }
 const Map: FC<MapProps> = ({ markers }) => {
   const [activeMarker, setActiveMarker] = useState(null)
@@ -35,6 +35,7 @@ const Map: FC<MapProps> = ({ markers }) => {
   }
 
   const handleOnLoad = (map: google.maps.Map) => {
+    if (!markers) return
     const bounds = new google.maps.LatLngBounds()
     markers.forEach(({ position }) => bounds.extend(position))
     map.fitBounds(bounds)
@@ -52,7 +53,7 @@ const Map: FC<MapProps> = ({ markers }) => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: '100%', height: '100%' }}
     >
-      {reloadMarkers &&
+      {reloadMarkers && markers &&
         markers.map(({ id, name, position }) => (
           <Marker
             key={id}
