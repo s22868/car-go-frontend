@@ -6,8 +6,8 @@ import type { ImageUrl } from './ImageUrl';
 import type { Point } from './Point';
 
 export type CarOfferRes = {
-    id?: string;
-    owner_id?: string;
+    id: string;
+    owner_id: string;
     make: string;
     model: string;
     year: string;

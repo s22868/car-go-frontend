@@ -256,6 +256,27 @@ image: Blob;
     }
 
     /**
+     * Get car offer info
+     * @param offerId offer id
+     * @returns CarOfferRes OK
+     * @throws ApiError
+     */
+    public static getOfferOfferId(
+offerId: string,
+): CancelablePromise<CarOfferRes> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/offer/{offerId}',
+            path: {
+                'offerId': offerId,
+            },
+            errors: {
+                400: `Bad Request`,
+            },
+        });
+    }
+
+    /**
      * Reserved car dates
      * Returns the dates when the car is rented
      * @param offerId offer id
