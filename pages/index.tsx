@@ -113,7 +113,6 @@ export const getServerSideProps: GetServerSideProps<{
   carOffers: CarOfferRes[]
 }> = async (context) => {
   const carOffers: CarOfferRes[] = await DefaultService.getOffers()
-  console.log(carOffers)
   return {
     props: {
       carOffers,
