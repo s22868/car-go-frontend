@@ -53,7 +53,8 @@ const Map: FC<MapProps> = ({ markers }) => {
       onClick={() => setActiveMarker(null)}
       mapContainerStyle={{ width: '100%', height: '100%' }}
     >
-      {reloadMarkers && markers &&
+      {reloadMarkers &&
+        markers &&
         markers.map(({ id, name, position }) => (
           <Marker
             key={id}
