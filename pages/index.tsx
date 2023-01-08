@@ -34,9 +34,11 @@ const Home: NextPage<
           </p>
           {user ? (
             <div className="flex flex-col items-end">
-              <p className="hidden text-xs sm:block text-brand-gray-200">
-                {user.email}
-              </p>
+              <Link href={'/user-settings'}>
+                <p className="hidden text-xs sm:block text-brand-gray-200">
+                  {user.email}
+                </p>
+              </Link>
               <button
                 onClick={handleLogout}
                 className="text-brand-red hover:underline"

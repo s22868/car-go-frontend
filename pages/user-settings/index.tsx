@@ -3,6 +3,9 @@ import Head from 'next/head'
 import { UseUser } from 'hooks/useUser'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Input from '@components/shared-components/input/Input'
+import Link from 'next/link'
+import Button from '@components/shared-components/button/Button'
 
 const UserSettings: NextPage = () => {
   const router = useRouter()
@@ -19,39 +22,47 @@ const UserSettings: NextPage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-zinc-400">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-brand-gray-400">
       <Head>
         <title>Car-Go - Ustawienia profilu</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col items-center justify-center flex-1 w-full gap-4 px-20 text-center">
-        <h1 className="text-xl">Ustawienia profilu</h1>
+      <main>
+        <h1 className="mb-4 text-xl text-center text-brand-red">
+          Ustawienia profilu
+        </h1>
         <div className="flex flex-col gap-3">
           <label className="flex flex-col items-start">
-            <p>Id:</p>
-            <input
+            <p className="text-brand-red">Id:</p>
+            <Input
               value={user?.id}
               disabled
               className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
             />
           </label>
           <label className="flex flex-col items-start">
-            <p>E-mail:</p>
-            <input
+            <p className="text-brand-red">E-mail:</p>
+            <Input
               value={user?.email}
               disabled
               className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
             />
           </label>
           <label className="flex flex-col items-start">
-            <p>Weryfikacja konta:</p>
-            <input
+            <p className="text-brand-red">Weryfikacja konta:</p>
+            <Input
               value={user?.is_verified ? 'Zweryfikowane' : 'Brak'}
               disabled
               className="h-10 px-2 border border-gray-300 rounded-md outline-none focus:border-gray-900"
             />
           </label>
         </div>
+
+        <Link href={'/create-offer'}>
+          <Button type="button" className="w-full mt-6">
+            Dodaj oferte
+          </Button>
+        </Link>
       </main>
     </div>
   )
