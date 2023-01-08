@@ -12,12 +12,12 @@ const Offer: NextPage<
     carOffer && ` - ${carOffer.city} - ${carOffer.model}`
   }`
   return (
-    <div className="w-screen h-screen p-8 bg-brand-gray-400">
+    <div className="w-screen h-full min-h-screen p-8 bg-brand-gray-400">
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex items-center justify-center h-full">
+      <main>
         <div className="flex flex-col items-center">
           <div className="mb-4">
             {carOffer.images
@@ -31,7 +31,7 @@ const Offer: NextPage<
                 />
               ))}
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap justify-center gap-2">
             {Object.entries(carOffer).map(([keys, values], index) => (
               <div>
                 <div className="text-center text-brand-red">{keys}:</div>
