@@ -108,7 +108,7 @@ const CreateOffer: NextPage = () => {
               <div>
                 <div className="text-brand-red">{keys}</div>
                 <Input
-                  value={(offerData[keys as any] as any) || ''}
+                  value={(offerData[keys as Partial<keyof CarOfferReq>] as any) || ''}
                   onChange={(e) =>
                     setOfferData((prev) => {
                       return {
