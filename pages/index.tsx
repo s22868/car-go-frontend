@@ -1,4 +1,8 @@
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
+import type {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { UseUser } from 'hooks/useUser'
@@ -8,9 +12,9 @@ import Map from '@components/home/map/Map'
 import Input from '@components/shared-components/input/Input'
 import Button from '@components/shared-components/button/Button'
 
-const Home = ({
-  carOffers,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Home: NextPage<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ carOffers }) => {
   const { logout, user } = UseUser()
 
   const handleLogout = () => {
@@ -75,15 +79,17 @@ const Home = ({
                 Szukaj
               </Button>
             </div>
-            <div className='flex flex-col gap-4 overflow-y-scroll scrollbar-hide'>
+            <div className="flex flex-col gap-4 overflow-y-scroll scrollbar-hide">
               {carOffers.map((offer) => (
-                <ListItem
-                  key={offer.id}
-                  make={offer.make}
-                  model={offer.model}
-                  pricePerDay={offer.price_per_day}
-                  imgSrc={offer.images[0]?.url || ''}
-                />
+                <Link href={`/offer/${offer.id}`}>
+                  <ListItem
+                    key={offer.id}
+                    make={offer.make}
+                    model={offer.model}
+                    pricePerDay={offer.price_per_day}
+                    imgSrc={offer.images[0]?.url || ''}
+                  />
+                </Link>
               ))}
             </div>
           </div>
@@ -112,7 +118,7 @@ export default Home
 export const getServerSideProps: GetServerSideProps<{
   carOffers: CarOfferRes[]
 }> = async (context) => {
-  const carOffers: CarOfferRes[] = await DefaultService.getOffers()
+  const carOffers = await DefaultService.getOffers()
   return {
     props: {
       carOffers,
