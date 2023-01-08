@@ -9,7 +9,7 @@ const Offer: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ carOffer }) => {
   const title = `Car-Go ${
-    carOffer && ` - ${carOffer.city} - ${carOffer.model}`
+    carOffer && ` - ${carOffer.city} - ${carOffer.make} ${carOffer.model}`
   }`
   return (
     <div className="w-screen h-full min-h-screen p-8 bg-brand-gray-400">
