@@ -4,6 +4,8 @@
 import type { AccessToken } from '../models/AccessToken';
 import type { CarOfferReq } from '../models/CarOfferReq';
 import type { CarOfferRes } from '../models/CarOfferRes';
+import type { MakeReservation } from '../models/MakeReservation';
+import type { ReservationList } from '../models/ReservationList';
 import type { UserCredentials } from '../models/UserCredentials';
 import type { UserInfo } from '../models/UserInfo';
 import type { UserProfile } from '../models/UserProfile';
@@ -130,6 +132,7 @@ requestBody?: UserProfile,
             mediaType: 'application/json',
             errors: {
                 401: `Unauthorized`,
+                403: `Forbidden`,
             },
         });
     }
@@ -139,13 +142,13 @@ requestBody?: UserProfile,
      * Add car offer
      * @param authorization Bearer token
      * @param requestBody 
-     * @returns any Created
+     * @returns CarOfferRes OK
      * @throws ApiError
      */
     public static postOffersAdd(
 authorization: string,
 requestBody?: CarOfferReq,
-): CancelablePromise<any> {
+): CancelablePromise<CarOfferRes> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/offers',
@@ -188,6 +191,123 @@ features?: string,
             },
             errors: {
                 400: `Bad Request`,
+            },
+        });
+    }
+
+    /**
+     * Delete offer
+     * Delete car offer
+     * @param offerId offer id
+     * @param authorization Bearer token
+     * @returns void 
+     * @throws ApiError
+     */
+    public static deleteOffer(
+offerId: string,
+authorization: string,
+): CancelablePromise<void> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/offer/{offerId}',
+            path: {
+                'offerId': offerId,
+            },
+            headers: {
+                'Authorization': authorization,
+            },
+            errors: {
+                401: `Unauthorized`,
+                404: `Not Found`,
+            },
+        });
+    }
+
+    /**
+     * Add pictures
+     * @param offerId offer id
+     * @param authorization Bearer token
+     * @param formData 
+     * @returns any Created
+     * @throws ApiError
+     */
+    public static postOfferOfferId(
+offerId: string,
+authorization: string,
+formData?: {
+image: Blob;
+},
+): CancelablePromise<any> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/offer/{offerId}',
+            path: {
+                'offerId': offerId,
+            },
+            headers: {
+                'Authorization': authorization,
+            },
+            formData: formData,
+            mediaType: 'multipart/form-data',
+            errors: {
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * Reserved car dates
+     * Returns the dates when the car is rented
+     * @param offerId offer id
+     * @param requestBody 
+     * @returns ReservationList OK
+     * @throws ApiError
+     */
+    public static getReservation(
+offerId: string,
+requestBody?: ReservationList,
+): CancelablePromise<ReservationList> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/reservation/{offerId}',
+            path: {
+                'offerId': offerId,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * Make reservation
+     * Request a reservation
+     * @param offerId offer id
+     * @param authorization Bearer token
+     * @param requestBody 
+     * @returns void 
+     * @throws ApiError
+     */
+    public static postReservationOfferId(
+offerId: string,
+authorization: string,
+requestBody?: MakeReservation,
+): CancelablePromise<void> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/reservation/{offerId}',
+            path: {
+                'offerId': offerId,
+            },
+            headers: {
+                'Authorization': authorization,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                401: `Unauthorized`,
             },
         });
     }
