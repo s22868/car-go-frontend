@@ -82,9 +82,9 @@ const CreateOffer: NextPage = () => {
         ...(offerData as CarOfferReq),
       })
 
-    //   await DefaultService.postOfferOfferId(res.id, token, {
-    //     image: selectedFile!,
-    //   })
+      await DefaultService.postOfferOfferId(res.id, token, {
+        image: selectedFile!,
+      })
     } catch {
       setError('Błąd przy dodawaniu ogłoszenia :(')
     }
@@ -108,7 +108,7 @@ const CreateOffer: NextPage = () => {
               <div>
                 <div className="text-brand-red">{keys}</div>
                 <Input
-                  value={(offerData[keys as Partial<keyof CarOfferReq>] as any) || ''}
+                  value={(offerData[keys as keyof CarOfferReq] as keyof CarOfferReq) || ''}
                   onChange={(e) =>
                     setOfferData((prev) => {
                       return {
