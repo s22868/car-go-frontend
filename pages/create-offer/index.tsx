@@ -1,3 +1,4 @@
+import { Spinner } from '@components/shared-components'
 import Button from '@components/shared-components/button/Button'
 import Input from '@components/shared-components/input/Input'
 import Select from '@components/shared-components/select/Select'
@@ -42,7 +43,10 @@ const CreateOffer: NextPage = () => {
     seats_amount: '',
     year: '',
     price_per_day: 0,
+    features: [Feature.AC],
+    fuel_type: FuelType.DIESEL
   })
+  const [loading, setLoading] = useState(false)
   const [selectedFile, setSelectedFile] = useState<File>()
   const [error, setError] = useState('')
   const router = useRouter()
@@ -54,6 +58,7 @@ const CreateOffer: NextPage = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    setLoading(true)
     const test = Object.entries(offerData)
       .map(([keys, value]) => {
         if (!value) {
@@ -63,9 +68,9 @@ const CreateOffer: NextPage = () => {
       })
       .filter((val) => !val)
 
-    if(!selectedFile){
-        setError("Nie dodano zdjęcia :(")
-        return
+    if (!selectedFile) {
+      setError('Nie dodano zdjęcia :(')
+      return
     }
     if (test.length > 0) {
       setError('Nie podano wszystkich danych :(')
@@ -77,7 +82,7 @@ const CreateOffer: NextPage = () => {
       return
     }
     try {
-      const token = "Bearer " + localStorage.getItem('cargo_token')!
+      const token = 'Bearer ' + localStorage.getItem('cargo_token')!
       const res = await DefaultService.postOffersAdd(token, {
         ...(offerData as CarOfferReq),
       })
@@ -85,8 +90,11 @@ const CreateOffer: NextPage = () => {
       await DefaultService.postOfferOfferId(res.id, token, {
         image: selectedFile!,
       })
+      setLoading(false)
+      router.push('/')
     } catch {
       setError('Błąd przy dodawaniu ogłoszenia :(')
+      setLoading(false)
     }
   }
 
@@ -108,7 +116,12 @@ const CreateOffer: NextPage = () => {
               <div>
                 <div className="text-brand-red">{keys}</div>
                 <Input
-                  value={(offerData[keys as keyof CarOfferReq] as keyof CarOfferReq) || ''}
+                  required
+                  value={
+                    (offerData[
+                      keys as keyof CarOfferReq
+                    ] as keyof CarOfferReq) || ''
+                  }
                   onChange={(e) =>
                     setOfferData((prev) => {
                       return {
@@ -159,8 +172,8 @@ const CreateOffer: NextPage = () => {
             </div>
           </div>
           <div className="flex justify-center mt-6">
-            <Button type="submit" className="px-4">
-              Dodaj ogłoszenie
+            <Button disabled={loading} type="submit" className="px-4">
+              {loading ? <Spinner/> : "Dodaj ogłoszenie"}
             </Button>
           </div>
         </form>
