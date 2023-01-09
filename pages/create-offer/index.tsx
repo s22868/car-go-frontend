@@ -114,7 +114,7 @@ const CreateOffer: NextPage = () => {
       <main className="flex flex-col items-center justify-center flex-1 w-full gap-4 px-20 text-center">
         <form onSubmit={handleSubmit} encType="multipart/form-data">
           <div className="flex flex-wrap items-center justify-center gap-2">
-            <input required type="file" onChange={handleFileInput} />
+            <input required type="file" accept="image/png, image/jpeg" onChange={handleFileInput} />
             {Object.entries(offerFields).map(([keys, values], index) => (
               <div>
                 <div className="text-brand-red">{keys}</div>
