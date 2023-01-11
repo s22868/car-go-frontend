@@ -4,6 +4,7 @@ import NextImage from 'next/image'
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import Head from 'next/head'
 import React from 'react'
+import Button from '@components/shared-components/button/Button'
 
 const Offer: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -31,13 +32,28 @@ const Offer: NextPage<
                 />
               ))}
           </div>
-          <div className="flex flex-wrap justify-center gap-2">
-            {Object.entries(carOffer).map(([keys, values], index) => (
-              <div>
-                <div className="text-center text-brand-red">{keys}:</div>
-                <Input key={index} value={values?.toString()} disabled />
-              </div>
-            ))}
+          <div className="flex justify-center gap-2">
+            <div className="bg-brand-gray-300">...</div>
+            <div className="flex flex-col gap-8 p-6 bg-brand-gray-300 rounded-2xl">
+              <div className='text-2xl font-semibold text-brand-gray-100'>Rezerwacja</div>
+              <Input
+                className="w-[300px]"
+                dark
+                placeholder="Data odbioru"
+                onFocus={(e) => (e.target.type = 'date')}
+                onBlur={(e) => (e.target.type = 'text')}
+                type="text"
+              />
+              <Input
+                className="w-[300px]"
+                dark
+                placeholder="Data zwrotu"
+                onFocus={(e) => (e.target.type = 'date')}
+                onBlur={(e) => (e.target.type = 'text')}
+                type="text"
+              />
+              <Button type='button'>Zarezerwuj</Button>
+            </div>
           </div>
         </div>
       </main>
