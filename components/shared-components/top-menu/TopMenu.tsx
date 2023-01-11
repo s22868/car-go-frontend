@@ -1,8 +1,10 @@
 import { UseUser } from 'hooks/useUser'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 
 const TopMenu: FC = () => {
+  const router = useRouter()
   const { logout, user } = UseUser()
 
   const handleLogout = () => {
@@ -10,7 +12,10 @@ const TopMenu: FC = () => {
   }
   return (
     <div className="flex items-center justify-between mb-8">
-      <p className="text-3xl font-semibold cursor-default text-brand-gray-100">
+      <p
+        className="text-3xl font-semibold cursor-pointer text-brand-gray-100"
+        onClick={() => router.push('/')}
+      >
         cargo.<span className="text-brand-red">co</span>
       </p>
       {user ? (
