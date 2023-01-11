@@ -14,6 +14,9 @@ const Offer: NextPage<
   const title = `Car-Go ${
     carOffer && ` - ${carOffer.city} - ${carOffer.make} ${carOffer.model}`
   }`
+  if(!carOffer){
+    return null
+  }
   return (
     <div className="w-screen h-full min-h-screen p-8 bg-brand-gray-400">
       <Head>
