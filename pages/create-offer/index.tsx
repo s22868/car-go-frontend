@@ -42,9 +42,9 @@ const CreateOffer: NextPage = () => {
     model: '',
     seats_amount: '',
     year: '',
-    price_per_day: 0,
+    price_per_day: undefined,
     features: [Feature.AC],
-    fuel_type: FuelType.DIESEL
+    fuel_type: FuelType.DIESEL,
   })
   const [loading, setLoading] = useState(false)
   const [selectedFile, setSelectedFile] = useState<File>()
@@ -111,73 +111,102 @@ const CreateOffer: NextPage = () => {
         <title>Car-Go - Dodaj oferte</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col items-center justify-center flex-1 w-full gap-4 px-20 text-center">
+      <main className="flex items-center justify-center flex-1 w-full gap-4 px-20">
         <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            <input required type="file" accept="image/png, image/jpeg" onChange={handleFileInput} />
-            {Object.entries(offerFields).map(([keys, values], index) => (
-              <div>
-                <div className="text-brand-red">{keys}</div>
+          <div className="flex flex-col gap-6 p-6 bg-brand-gray-300 rounded-2xl">
+            <h1 className="mb-4 text-2xl font-semibold text-brand-gray-100">
+              Dodaj ogłoszenie
+            </h1>
+            <div className="flex flex-col gap-4">
+              <p className="text-xl font-semibold text-brand-gray-100">
+                Informacje dotyczące pojazdu
+              </p>
+              <div className="flex gap-6">
+                <Input dark placeholder="Marka" value={offerData.make} />
+                <Input dark placeholder="Model" value={offerData.model} />
                 <Input
-                  required
-                  value={
-                    (offerData[
-                      keys as keyof CarOfferReq
-                    ] as keyof CarOfferReq) || ''
-                  }
-                  onChange={(e) =>
-                    setOfferData((prev) => {
-                      return {
-                        ...prev,
-                        [keys]:
-                          keys === 'price_per_day'
-                            ? Number(e.target.value)
-                            : e.target.value,
-                      }
-                    })
-                  }
-                  type={keys === 'price_per_day' ? 'number' : 'text'}
-                  placeholder={values.toString()}
+                  dark
+                  placeholder="Moc silnika"
+                  value={offerData.horsepower}
                 />
               </div>
-            ))}
-            <div>
-              <div className="text-brand-red">Fuel</div>
-              <Select
-                value={offerData?.fuel_type}
-                onChange={(e) =>
-                  setOfferData((prev) => ({
-                    ...prev,
-                    fuel_type: e.target.value as FuelType,
-                  }))
-                }
-              >
-                {fuels.map((fuel) => (
-                  <option value={fuel}>{fuel}</option>
-                ))}
-              </Select>
+              <div className="flex gap-6">
+                <Input
+                  dark
+                  placeholder="Rok produkcji"
+                  value={offerData.year}
+                />
+                <Input
+                  dark
+                  placeholder="Liczba miejsc"
+                  value={offerData.seats_amount}
+                />
+              </div>
+              <div className="flex gap-4">
+                <div>
+                  <div className="text-brand-red">Fuel</div>
+                  <Select
+                    value={offerData?.fuel_type}
+                    onChange={(e) =>
+                      setOfferData((prev) => ({
+                        ...prev,
+                        fuel_type: e.target.value as FuelType,
+                      }))
+                    }
+                  >
+                    {fuels.map((fuel) => (
+                      <option value={fuel}>{fuel}</option>
+                    ))}
+                  </Select>
+                </div>
+                <div>
+                  <div className="text-brand-red">Feature</div>
+                  <Select
+                    value={offerData?.features}
+                    onChange={(e) =>
+                      setOfferData((prev) => ({
+                        ...prev,
+                        features: [e.target.value as Feature],
+                      }))
+                    }
+                  >
+                    {features.map((feature) => (
+                      <option value={feature}>{feature}</option>
+                    ))}
+                  </Select>
+                </div>
+              </div>
             </div>
             <div>
-              <div className="text-brand-red">Feature</div>
-              <Select
-                value={offerData?.features}
-                onChange={(e) =>
-                  setOfferData((prev) => ({
-                    ...prev,
-                    features: [e.target.value as Feature],
-                  }))
-                }
-              >
-                {features.map((feature) => (
-                  <option value={feature}>{feature}</option>
-                ))}
-              </Select>
+              <p className="mb-4 text-xl font-semibold text-brand-gray-100">
+                Zdjęcia pojazdu
+              </p>
+              <input
+                required
+                type="file"
+                accept="image/png, image/jpeg"
+                onChange={handleFileInput}
+              />
             </div>
-          </div>
+            <div>
+              <p className="mb-4 text-xl font-semibold text-brand-gray-100">
+                Informacje dotyczące wynajmu
+              </p>
+              <div className="flex gap-6">
+                <Input dark placeholder="Lokalizacja" value={offerData.city} />
+                <Input
+                  dark
+                  placeholder="Cena za dobę"
+                  type="number"
+                  value={offerData.price_per_day}
+                />
+              </div>
+            </div>
           <div className="flex justify-center mt-6">
-            <Button disabled={loading} type="submit" className="px-4 w-">
-              {loading ? <Spinner/> : "Dodaj ogłoszenie"}
+            <Button disabled={loading} type="submit" className="px-4 w-[400px]">
+              {loading ? <Spinner /> : 'Dodaj ogłoszenie'}
             </Button>
+          </div>
           </div>
         </form>
         <div className="text-red-600">{error}</div>
