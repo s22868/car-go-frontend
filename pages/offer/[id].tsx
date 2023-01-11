@@ -5,6 +5,8 @@ import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import Head from 'next/head'
 import React from 'react'
 import Button from '@components/shared-components/button/Button'
+import TopMenu from '@components/shared-components/top-menu/TopMenu'
+import CarStats from 'pages/offer/CarStats'
 
 const Offer: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -19,25 +21,66 @@ const Offer: NextPage<
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <TopMenu />
         <div className="flex flex-col items-center">
-          <div className="mb-4">
-            {carOffer.images
-              ?.filter(({ url }) => url)
-              .map(({ url }) => (
-                <NextImage
-                  src={url!}
-                  alt={`${carOffer.make} ${carOffer.model}`}
-                  width={400}
-                  height={400}
-                />
-              ))}
-          </div>
-          <div className="flex justify-center gap-2">
-            <div className="bg-brand-gray-300">...</div>
-            <div className="flex flex-col gap-8 p-6 bg-brand-gray-300 rounded-2xl">
-              <div className='text-2xl font-semibold text-brand-gray-100'>Rezerwacja</div>
+          <div className="flex justify-center gap-8">
+            <div className="flex flex-col w-[822px] gap-6 p-6 bg-brand-gray-300 rounded-2xl">
+              <div className="flex gap-2 text-2xl font-semibold text-brand-gray-100">
+                <p className="first-letter:uppercase">{carOffer.make}</p>
+                <p className="first-letter:uppercase">{carOffer.model}</p>
+              </div>
+              <div className="flex">
+                <div className="relative w-[509px] h-[254px] rounded-xl overflow-hidden">
+                  <NextImage
+                    className="object-cover"
+                    src={carOffer.images[0].url || ''}
+                    alt={`${carOffer.make} ${carOffer.model}`}
+                    fill
+                  />
+                </div>
+                <div className="flex flex-col gap-1">
+                  {carOffer.images
+                    ?.filter(
+                      ({ url }, index) => url && index !== 0 && index < 3
+                    )
+                    .map(({ url }) => (
+                      <div className="relative w-[209px] h-[54px] rounded-xl overflow-hidden">
+                        <NextImage
+                          className="object-cover"
+                          src={url!}
+                          alt={`${carOffer.make} ${carOffer.model}`}
+                          fill
+                        />
+                      </div>
+                    ))}
+                </div>
+              </div>
+              <div className="px-6">
+                <div className="flex">
+                  <span className="text-xl font-medium text-brand-gray-200">
+                    Lokalizacja pojazdu
+                  </span>
+                  <span className="ml-auto text-xl font-medium text-brand-gray-200">
+                    Cena za dobę
+                  </span>
+                </div>
+                <div className="flex">
+                  <span className="text-2xl font-semibold text-brand-gray-100">
+                    {carOffer.city}
+                  </span>
+                  <span className="ml-auto text-2xl font-semibold text-brand-gray-100">
+                    {carOffer.price_per_day} PLN
+                  </span>
+                </div>
+              </div>
+              <CarStats carOffer={carOffer} />
+            </div>
+            <div className="flex flex-col gap-8 p-6 bg-brand-gray-300 rounded-2xl h-fit">
+              <div className="text-2xl font-semibold text-brand-gray-100">
+                Rezerwacja
+              </div>
               <Input
-                className="w-[300px]"
+                className="w-[300px] cursor-pointer"
                 dark
                 placeholder="Data odbioru"
                 onFocus={(e) => (e.target.type = 'date')}
@@ -45,14 +88,14 @@ const Offer: NextPage<
                 type="text"
               />
               <Input
-                className="w-[300px]"
+                className="w-[300px] cursor-pointer"
                 dark
                 placeholder="Data zwrotu"
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
                 type="text"
               />
-              <Button type='button'>Zarezerwuj</Button>
+              <Button type="button">Zarezerwuj</Button>
             </div>
           </div>
         </div>
