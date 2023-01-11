@@ -6,6 +6,9 @@ interface CarStatsProps {
 }
 
 const CarStats: FC<CarStatsProps> = ({ carOffer }) => {
+  if(!carOffer){
+    return null
+  }
   return (
     <div className="p-6 space-y-4 bg-brand-gray-400 rounded-xl">
       <div className="flex">
