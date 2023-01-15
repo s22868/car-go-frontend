@@ -96,7 +96,9 @@ const UserSettings: NextPage = () => {
             <div className="space-y-2.5 md:space-y-6">
               <Field
                 toggleActive={toggle}
-                value={'Imie'}
+                value={`${user?.first_name || 'Imie'} ${
+                  user?.last_name || 'Nazwisko'
+                }`}
                 title="Imie i nazwisko"
               >
                 <form
@@ -118,7 +120,12 @@ const UserSettings: NextPage = () => {
                     />
                   </div>
                   <div>
-                    <Button tabIndex={-1} type="submit" className="w-1/3">
+                    <Button
+                      disabled={loading}
+                      tabIndex={-1}
+                      type="submit"
+                      className="w-1/3"
+                    >
                       Zapisz
                     </Button>
                   </div>
@@ -130,7 +137,7 @@ const UserSettings: NextPage = () => {
                 value={user.email}
                 title="Adres e-mail"
               />
-              <Field toggleActive={toggle} value={'telefon'} title="Telefon">
+              <Field toggleActive={toggle} value={user?.phone || "Brak telefonu"} title="Telefon">
                 <form
                   onSubmit={(e) => handleSubmit(e, 'Phone')}
                   className="flex flex-col gap-6"
@@ -145,13 +152,22 @@ const UserSettings: NextPage = () => {
                     />
                   </div>
                   <div>
-                    <Button tabIndex={-1} type="submit" className="w-1/3">
+                    <Button
+                      disabled={loading}
+                      tabIndex={-1}
+                      type="submit"
+                      className="w-1/3"
+                    >
                       Zapisz
                     </Button>
                   </div>
                 </form>
               </Field>
-              <Field toggleActive={toggle} value={'prawko'} title="Prawo jazdy">
+              <Field
+                toggleActive={toggle}
+                value={user?.driving_licence || 'Brak dodanego prawa jazdy'}
+                title="Prawo jazdy"
+              >
                 <form
                   onSubmit={(e) => handleSubmit(e, 'License')}
                   className="flex flex-col gap-6"
@@ -165,7 +181,12 @@ const UserSettings: NextPage = () => {
                     />
                   </div>
                   <div>
-                    <Button tabIndex={-1} type="submit" className="w-1/3">
+                    <Button
+                      disabled={loading}
+                      tabIndex={-1}
+                      type="submit"
+                      className="w-1/3"
+                    >
                       Zapisz
                     </Button>
                   </div>
@@ -173,7 +194,7 @@ const UserSettings: NextPage = () => {
               </Field>
               <Field
                 toggleActive={toggle}
-                value={'data ur'}
+                value={user?.dob || 'Brak daty urodzenia'}
                 title="Data urodzenia"
               >
                 <form
@@ -191,7 +212,12 @@ const UserSettings: NextPage = () => {
                     />
                   </div>
                   <div>
-                    <Button tabIndex={-1} type="submit" className="w-1/3">
+                    <Button
+                      disabled={loading}
+                      tabIndex={-1}
+                      type="submit"
+                      className="w-1/3"
+                    >
                       Zapisz
                     </Button>
                   </div>
