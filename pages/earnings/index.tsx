@@ -75,7 +75,7 @@ const Earnings: FC = () => {
               ))}
             </div>
           </div>
-          <div className="p-8 rounded-2xl lg:w-1/4 bg-brand-gray-300">
+          <div className="p-8 h-fit rounded-2xl lg:w-1/4 bg-brand-gray-300">
             <div className="mb-6 text-2xl font-semibold text-brand-gray-100">
               Saldo
             </div>
