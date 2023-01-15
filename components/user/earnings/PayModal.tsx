@@ -81,6 +81,8 @@ const PayModal: FC<PayModalProps> = ({ onClose }) => {
             onChange={(e) => setMonth(e.target.value)}
             size={4}
             required
+            minLength={1}
+            maxLength={2}
           />
           <Input
             dark
@@ -89,8 +91,10 @@ const PayModal: FC<PayModalProps> = ({ onClose }) => {
             onChange={(e) => setYear(e.target.value)}
             size={4}
             required
+            minLength={4}
+            maxLength={4}
           />
-          <Input dark placeholder="CVC" size={4} />
+          <Input dark placeholder="CVC" size={4} minLength={3} maxLength={3} />
         </div>
         <div>
           <Input
