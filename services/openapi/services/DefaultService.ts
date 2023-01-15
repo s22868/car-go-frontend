@@ -284,26 +284,20 @@ offerId: string,
     /**
      * Reserved car dates
      * Returns the dates when the car is rented (for the owner)
-     * @param offerId offer id
      * @param authorization Bearer token
      * @returns Reservation OK
      * @throws ApiError
      */
-    public static getReservation(
-offerId: string,
+    public static getOwnersReservations(
 authorization: string,
 ): CancelablePromise<Array<Reservation>> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/reservation/{offerId}',
-            path: {
-                'offerId': offerId,
-            },
+            url: '/reservations',
             headers: {
                 'Authorization': authorization,
             },
             errors: {
-                400: `Bad Request`,
                 401: `Unauthorized`,
             },
         });
@@ -312,23 +306,18 @@ authorization: string,
     /**
      * Make reservation
      * Request a reservation
-     * @param offerId offer id
      * @param authorization Bearer token
      * @param requestBody 
      * @returns void 
      * @throws ApiError
      */
     public static makeReservation(
-offerId: string,
 authorization: string,
 requestBody?: MakeReservation,
 ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/reservation/{offerId}',
-            path: {
-                'offerId': offerId,
-            },
+            url: '/reservations',
             headers: {
                 'Authorization': authorization,
             },
