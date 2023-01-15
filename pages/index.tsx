@@ -52,7 +52,7 @@ const Home: NextPage<
             </div>
             <div className="flex flex-col gap-4 overflow-y-scroll scrollbar-hide">
               {carOffers.map((offer) => (
-                <Link href={`/offer/${offer.id}`}>
+                <Link href={`/offer/${offer.id}`} key={offer.id}>
                   <ListItem
                     key={offer.id}
                     make={offer.make}
