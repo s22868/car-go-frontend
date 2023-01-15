@@ -9,9 +9,9 @@ const TopMenu: FC = () => {
   const { user } = UseUser()
   return (
     <div className="flex items-center justify-between mb-8">
-      <p className="cursor-pointer" onClick={() => router.push('/')}>
+      <div className="cursor-pointer" onClick={() => router.push('/')}>
         <Logo />
-      </p>
+      </div>
       {user ? (
         <div className="flex flex-col items-end">
           <Link href={'/user-settings'}>
