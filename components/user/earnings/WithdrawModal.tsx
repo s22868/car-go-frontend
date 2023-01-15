@@ -38,14 +38,16 @@ const WithdrawModal: FC<WithdrawModalProps> = ({ onClose }) => {
   }
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-6 mt-6">
-      <div className="text-brand-gray-100">
-        Saldo: {user?.balance || 0} PLN
-      </div>
+      <div className="text-brand-gray-100">Saldo: {user?.balance || 0} PLN</div>
       <Input
         dark
         placeholder="Kwota do wypłaty"
         value={amount}
+        min={1}
+        max={user?.balance}
         onChange={(e) => setAmount(e.target.value)}
+        type="number"
+        required
       />
       {error && <div className="text-brand-red">{error}</div>}
       <div className="flex justify-between gap-4">
