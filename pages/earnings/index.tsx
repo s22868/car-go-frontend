@@ -69,8 +69,8 @@ const Earnings: FC = () => {
                   dateFrom={item.from}
                   dateTo={item.to}
                   price={item.total_price}
-                  make={'Test'}
-                  model={'test2'}
+                  make={item.make}
+                  model={item.model}
                 />
               ))}
             </div>
