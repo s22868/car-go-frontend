@@ -66,22 +66,6 @@ const CreateOffer: NextPage = () => {
       })
       .filter((val) => !val)
 
-    if (!selectedFile) {
-      setError('Nie dodano zdjęcia :(')
-      setLoading(false)
-      return
-    }
-    if (test.length > 0) {
-      setError('Nie podano wszystkich danych :(')
-      setLoading(false)
-      return
-    }
-
-    if (!offerData) {
-      setError('Błąd przy dodawaniu ogłoszenia :(')
-      setLoading(false)
-      return
-    }
     try {
       const token = 'Bearer ' + localStorage.getItem('cargo_token')!
       const res = await DefaultService.postOffersAdd(token, {
@@ -120,30 +104,77 @@ const CreateOffer: NextPage = () => {
                 Informacje dotyczące pojazdu
               </p>
               <div className="flex gap-6">
-                <Input dark placeholder="Marka" value={offerData.make} />
-                <Input dark placeholder="Model" value={offerData.model} />
                 <Input
                   dark
+                  placeholder="Marka"
+                  value={offerData.make}
+                  onChange={(e) =>
+                    setOfferData((prev) => ({
+                      ...prev,
+                      make: e.target.value,
+                    }))
+                  }
+                  required
+                />
+                <Input
+                  dark
+                  placeholder="Model"
+                  value={offerData.model}
+                  onChange={(e) =>
+                    setOfferData((prev) => ({
+                      ...prev,
+                      model: e.target.value,
+                    }))
+                  }
+                  required
+                />
+                <Input
+                  dark
+                  type="number"
                   placeholder="Moc silnika"
                   value={offerData.horsepower}
+                  onChange={(e) =>
+                    setOfferData((prev) => ({
+                      ...prev,
+                      horsepower: e.target.value,
+                    }))
+                  }
+                  required
                 />
               </div>
               <div className="flex gap-6">
                 <Input
                   dark
+                  type="number"
                   placeholder="Rok produkcji"
                   value={offerData.year}
+                  onChange={(e) =>
+                    setOfferData((prev) => ({
+                      ...prev,
+                      year: e.target.value,
+                    }))
+                  }
+                  required
                 />
                 <Input
                   dark
+                  type="number"
                   placeholder="Liczba miejsc"
                   value={offerData.seats_amount}
+                  onChange={(e) =>
+                    setOfferData((prev) => ({
+                      ...prev,
+                      seats_amount: e.target.value,
+                    }))
+                  }
+                  required
                 />
               </div>
               <div className="flex gap-4">
                 <div>
                   <div className="text-brand-red">Fuel</div>
                   <Select
+                    required
                     value={offerData?.fuel_type}
                     onChange={(e) =>
                       setOfferData((prev) => ({
@@ -161,6 +192,7 @@ const CreateOffer: NextPage = () => {
                   {/* TODO: multichoices */}
                   <div className="text-brand-red">Feature</div>
                   <Select
+                    required
                     value={offerData?.features}
                     onChange={(e) =>
                       setOfferData((prev) => ({
@@ -192,12 +224,30 @@ const CreateOffer: NextPage = () => {
                 Informacje dotyczące wynajmu
               </p>
               <div className="flex gap-6">
-                <Input dark placeholder="Lokalizacja" value={offerData.city} />
                 <Input
+                  dark
+                  placeholder="Lokalizacja"
+                  value={offerData.city}
+                  onChange={(e) =>
+                    setOfferData((prev) => ({
+                      ...prev,
+                      city: e.target.value,
+                    }))
+                  }
+                  required
+                />
+                <Input
+                  required
                   dark
                   placeholder="Cena za dobę"
                   type="number"
                   value={offerData.price_per_day}
+                  onChange={(e) =>
+                    setOfferData((prev) => ({
+                      ...prev,
+                      price_per_day: Number(e.target.value),
+                    }))
+                  }
                 />
               </div>
             </div>
