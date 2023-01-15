@@ -1,9 +1,11 @@
 import classNames from 'classnames'
 import { UseUser } from 'hooks/useUser'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 
 const UserMenu: FC = () => {
+  const router = useRouter()
   const { logout } = UseUser()
 
   const handleLogout = () => {
@@ -16,7 +18,7 @@ const UserMenu: FC = () => {
           className={classNames(
             'flex items-center h-12 px-4 text-base font-semibold text-white transition-colors duration-300 cursor-pointer rounded-xl hover:bg-brand-red',
             {
-              'bg-brand-red': window?.location?.pathname === '/user-settings',
+              'bg-brand-red': router.pathname === '/user-settings',
             }
           )}
         >
@@ -28,7 +30,7 @@ const UserMenu: FC = () => {
           className={classNames(
             'flex items-center h-12 px-4 text-base font-semibold text-white transition-colors duration-300 cursor-pointer rounded-xl hover:bg-brand-red',
             {
-              'bg-brand-red': window?.location?.pathname === '/my-offers',
+              'bg-brand-red': router.pathname === '/my-offers',
             }
           )}
         >
@@ -40,7 +42,7 @@ const UserMenu: FC = () => {
           className={classNames(
             'flex items-center h-12 px-4 text-base font-semibold text-white transition-colors duration-300 cursor-pointer rounded-xl hover:bg-brand-red',
             {
-              'bg-brand-red': window?.location?.pathname === '/earnings',
+              'bg-brand-red': router.pathname === '/earnings',
             }
           )}
         >
