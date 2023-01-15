@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { FormEvent, useEffect, useState } from 'react'
 import { DefaultService } from '../../services/openapi'
 import { Input, Button } from '@components/shared-components'
+import Logo from '@components/shared-components/icons/Logo'
 
 const Verify: NextPage = () => {
   const router = useRouter()
@@ -37,9 +38,7 @@ const Verify: NextPage = () => {
       </Head>
       <main className="flex flex-col items-center justify-center flex-1 w-full gap-4 px-20 text-center">
         <div className="mb-10 space-y-4 md:mb-20">
-          <p className="text-5xl font-semibold text-brand-gray-100">
-            cargo.<span className="text-brand-red">co</span>
-          </p>
+          <Logo />
           <p className="text-xl font-medium text-brand-gray-200">
             car rental app
           </p>

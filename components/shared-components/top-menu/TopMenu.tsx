@@ -1,3 +1,4 @@
+import Logo from '@components/shared-components/icons/Logo'
 import { UseUser } from 'hooks/useUser'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -8,11 +9,8 @@ const TopMenu: FC = () => {
   const { user } = UseUser()
   return (
     <div className="flex items-center justify-between mb-8">
-      <p
-        className="text-3xl font-semibold cursor-pointer text-brand-gray-100"
-        onClick={() => router.push('/')}
-      >
-        cargo.<span className="text-brand-red">co</span>
+      <p className="cursor-pointer" onClick={() => router.push('/')}>
+        <Logo />
       </p>
       {user ? (
         <div className="flex flex-col items-end">
