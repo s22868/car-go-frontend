@@ -1,24 +1,24 @@
-import * as React from "react";
+import * as React from 'react'
 import Document, {
   Html,
   Head,
   Main,
   NextScript,
   DocumentContext,
-} from "next/document";
+} from 'next/document'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const originalRenderPage = ctx.renderPage;
+    const originalRenderPage = ctx.renderPage
     ctx.renderPage = () =>
       originalRenderPage({
         enhanceApp: (App) => App,
         enhanceComponent: (Component) => Component,
-      });
+      })
 
-    const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await Document.getInitialProps(ctx)
 
-    return initialProps;
+    return initialProps
   }
 
   render() {
@@ -36,10 +36,11 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <div id="modal-root" />
         </body>
       </Html>
-    );
+    )
   }
 }
 
-export default MyDocument;
+export default MyDocument
