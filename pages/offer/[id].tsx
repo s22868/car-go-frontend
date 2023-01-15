@@ -1,10 +1,12 @@
-import { CarOfferRes, DefaultService } from '@openapi'
+import { CarOfferRes, DefaultService, Insurance } from '@openapi'
 import NextImage from 'next/image'
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import Head from 'next/head'
-import React from 'react'
+import React, { FormEvent, useState } from 'react'
 import CarStats from '@components/offer/CarStats'
-import {Input, Button, TopMenu} from '@components/shared-components'
+import { Input, Button, TopMenu, Spinner } from '@components/shared-components'
+import classNames from 'classnames'
+import { UseUser } from 'hooks/useUser'
 
 const Offer: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -12,7 +14,36 @@ const Offer: NextPage<
   const title = `Car-Go ${
     carOffer && ` - ${carOffer.city} - ${carOffer.make} ${carOffer.model}`
   }`
-  if(!carOffer){
+  const { user, getUser } = UseUser()
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const [dateFrom, setDateFrom] = useState('')
+  const [dateTo, setDateTo] = useState('')
+  const [insurance, setInsurance] = useState<Insurance>(Insurance.CHEAP)
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    if (Number(user?.balance) < carOffer.price_per_day) {
+      return setError('Nie masz wystarczająco środków na koncie')
+    }
+    setLoading(true)
+    const token = localStorage.getItem('cargo_token')
+    const authorization = 'Bearer ' + token
+    try {
+      await DefaultService.makeReservation(authorization, {
+        from: dateFrom,
+        to: dateTo,
+        offer_id: carOffer.id,
+        insurance,
+      })
+      await getUser?.()
+    } catch {
+      setError('Coś poszło nie tak, spróbuj ponownie za chwile')
+    } finally {
+      setLoading(false)
+    }
+  }
+  if (!carOffer) {
     return null
   }
   return (
@@ -76,7 +107,10 @@ const Offer: NextPage<
               </div>
               <CarStats carOffer={carOffer} />
             </div>
-            <div className="flex flex-col gap-8 p-6 bg-brand-gray-300 rounded-2xl h-fit">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-6 p-6 bg-brand-gray-300 rounded-2xl h-fit"
+            >
               <div className="text-2xl font-semibold text-brand-gray-100">
                 Rezerwacja
               </div>
@@ -84,20 +118,67 @@ const Offer: NextPage<
                 className="w-[300px] cursor-pointer"
                 dark
                 placeholder="Data odbioru"
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
                 type="text"
+                required
               />
               <Input
                 className="w-[300px] cursor-pointer"
                 dark
                 placeholder="Data zwrotu"
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
                 type="text"
+                required
               />
-              <Button type="button">Zarezerwuj</Button>
-            </div>
+              <div>
+                <div className="text-brand-gray-100">Ubezpieczenie</div>
+                <div className="flex justify-between mt-2">
+                  <div
+                    onClick={() => setInsurance(Insurance.CHEAP)}
+                    className={classNames(
+                      'px-4 py-2 bg-brand-gray-400 text-brand-gray-100 rounded-xl cursor-pointer',
+                      {
+                        'text-brand-red': insurance === Insurance.CHEAP,
+                      }
+                    )}
+                  >
+                    Tanie
+                  </div>
+                  <div
+                    onClick={() => setInsurance(Insurance.MEDIUM)}
+                    className={classNames(
+                      'px-4 py-2 bg-brand-gray-400 text-brand-gray-100 rounded-xl cursor-pointer',
+                      {
+                        'text-brand-red': insurance === Insurance.MEDIUM,
+                      }
+                    )}
+                  >
+                    Średnie
+                  </div>
+                  <div
+                    onClick={() => setInsurance(Insurance.EXPENSIVE)}
+                    className={classNames(
+                      'px-4 py-2 bg-brand-gray-400 text-brand-gray-100 rounded-xl cursor-pointer',
+                      {
+                        'text-brand-red': insurance === Insurance.EXPENSIVE,
+                      }
+                    )}
+                  >
+                    Drogie
+                  </div>
+                </div>
+              </div>
+              {error && <div className="text-brand-red">{error}</div>}
+              <Button disabled={loading} type="submit">
+                {loading ? <Spinner /> : 'Zarezerwuj'}
+              </Button>
+            </form>
           </div>
         </div>
       </main>
