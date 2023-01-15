@@ -7,11 +7,13 @@ import Link from 'next/link'
 import { Input, Button, TopMenu } from '@components/shared-components'
 import UserMenu from '@components/user/UserMenu'
 import Field from '@components/user/profile/Field'
+import { DefaultService } from '@openapi'
 
 const UserSettings: NextPage = () => {
   const router = useRouter()
-  const { user } = UseUser()
+  const { user, getUser } = UseUser()
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -35,43 +37,58 @@ const UserSettings: NextPage = () => {
   }
   const toggleActive = () => setToggle((prev) => !prev)
 
-  const handleSubmit = (
+  const handleSubmit = async (
     e: FormEvent,
     type: 'Name' | 'Phone' | 'License' | 'Birthday'
   ) => {
     e.preventDefault()
     toggleActive()
     setLoading(true)
-    switch (type) {
-      case 'Name':
-        handleNameSubmit()
-        setLoading(false)
-        break
-      case 'Phone':
-        handlePhoneSubmit()
-        setLoading(false)
-        break
-      case 'License':
-        handleLicenseSubmit()
-        setLoading(false)
-        break
-      case 'Birthday':
-        handleBirthdaySubmit()
-        setLoading(false)
-        break
+    const token = localStorage.getItem('cargo_token')
+    const authorization = 'Bearer ' + token
+
+    try {
+      switch (type) {
+        case 'Name':
+          await handleNameSubmit(authorization)
+          break
+        case 'Phone':
+          await handlePhoneSubmit(authorization)
+          break
+        case 'License':
+          await handleLicenseSubmit(authorization)
+          break
+        case 'Birthday':
+          await handleBirthdaySubmit(authorization)
+          break
+      }
+      await getUser?.()
+      setLoading(false)
+    } catch {
+      setError('Coś poszło nie tak, spróbuj ponownie później')
     }
   }
-  const handleNameSubmit = () => {
+  const handleNameSubmit = async (authorization: string) => {
+    await DefaultService.postUserProfile(authorization, {
+      first_name: firstName,
+      last_name: lastName,
+    })
     setFirstName('')
     setLastName('')
   }
-  const handlePhoneSubmit = () => {
+  const handlePhoneSubmit = async (authorization: string) => {
+    await DefaultService.postUserProfile(authorization, { phone })
     setPhone('')
   }
-  const handleLicenseSubmit = () => {
+  const handleLicenseSubmit = async (authorization: string) => {
+    await DefaultService.postUserProfile(authorization, {
+      driving_licence: license,
+    })
+
     setLicense('')
   }
-  const handleBirthdaySubmit = () => {
+  const handleBirthdaySubmit = async (authorization: string) => {
+    await DefaultService.postUserProfile(authorization, { dob: birthday })
     setBirthday('')
   }
 
@@ -111,16 +128,19 @@ const UserSettings: NextPage = () => {
                       onChange={(e) => setFirstName(e.target.value)}
                       tabIndex={-1}
                       placeholder="Imie"
+                      size={14}
                       required
                     />
                     <Input
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       tabIndex={-1}
+                      size={14}
                       placeholder="Nazwisko"
                       required
                     />
                   </div>
+                  {error && <div className="text-brand-red">{error}</div>}
                   <div>
                     <Button
                       disabled={loading}
@@ -139,7 +159,11 @@ const UserSettings: NextPage = () => {
                 value={user.email}
                 title="Adres e-mail"
               />
-              <Field toggleActive={toggle} value={user?.phone || "Brak telefonu"} title="Telefon">
+              <Field
+                toggleActive={toggle}
+                value={user?.phone || 'Brak telefonu'}
+                title="Telefon"
+              >
                 <form
                   onSubmit={(e) => handleSubmit(e, 'Phone')}
                   className="flex flex-col gap-6"
@@ -156,6 +180,7 @@ const UserSettings: NextPage = () => {
                       placeholder="Telefon"
                     />
                   </div>
+                  {error && <div className="text-brand-red">{error}</div>}
                   <div>
                     <Button
                       disabled={loading}
@@ -186,6 +211,7 @@ const UserSettings: NextPage = () => {
                       required
                     />
                   </div>
+                  {error && <div className="text-brand-red">{error}</div>}
                   <div>
                     <Button
                       disabled={loading}
@@ -217,6 +243,7 @@ const UserSettings: NextPage = () => {
                       required
                     />
                   </div>
+                  {error && <div className="text-brand-red">{error}</div>}
                   <div>
                     <Button
                       disabled={loading}
