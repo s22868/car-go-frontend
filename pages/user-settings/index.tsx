@@ -83,11 +83,11 @@ const UserSettings: NextPage = () => {
       </Head>
       <main>
         <TopMenu />
-        <div className="flex flex-col gap-8 px-4 md:flex-row md:px-36">
+        <div className="flex flex-col gap-8 px-4 md:flex-row md:px-8 lg:px-36">
           <div className="pt-4 ">
             <UserMenu />
           </div>
-          <div className="w-full p-8 lg:w-2/3 bg-brand-gray-300 rounded-2xl">
+          <div className="w-full p-8 lg:w-2/4 bg-brand-gray-300 rounded-2xl">
             <div className="flex items-start justify-between mb-6">
               <h1 className="text-2xl font-semibold text-brand-gray-100">
                 Dane osobowe
