@@ -1,20 +1,36 @@
-import { Button, TopMenu } from '@components/shared-components'
+import { Button, Spinner, TopMenu } from '@components/shared-components'
 import Modal from '@components/shared-components/modal/Modal'
 import Earn from '@components/user/earnings/Earn'
 import PayModal from '@components/user/earnings/PayModal'
 import WithdrawModal from '@components/user/earnings/WithdrawModal'
 import UserMenu from '@components/user/UserMenu'
+import { DefaultService, Reservation } from '@openapi'
 import { UseUser } from 'hooks/useUser'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { FC, useEffect, useState } from 'react'
 
 const Earnings: FC = () => {
+  const [reservations, setReservations] = useState<Reservation[]>()
+  const [loading, setLoading] = useState(true)
+
   const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false)
 
   const { user, getUser } = UseUser()
+
+  useEffect(() => {
+    const token = localStorage.getItem('cargo_token')
+    if (!token) {
+      return
+    }
+    const authorization = 'Bearer ' + token
+    DefaultService.getOwnersReservations(authorization).then((res) => {
+      setReservations(res)
+      setLoading(false)
+    })
+  }, [user])
 
   const onClose = async () => {
     await getUser?.()
@@ -46,8 +62,17 @@ const Earnings: FC = () => {
                 Zarobki
               </h1>
             </div>
-            <div>
-              <Earn />
+            <div className="flex flex-col gap-4">
+              {loading && <Spinner />}
+              {reservations?.map((item) => (
+                <Earn
+                  dateFrom={item.from}
+                  dateTo={item.to}
+                  price={item.total_price}
+                  make={'Test'}
+                  model={'test2'}
+                />
+              ))}
             </div>
           </div>
           <div className="p-8 rounded-2xl lg:w-1/4 bg-brand-gray-300">
