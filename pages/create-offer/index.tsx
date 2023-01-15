@@ -90,7 +90,7 @@ const CreateOffer: NextPage = () => {
         ...(offerData as CarOfferReq),
       })
 
-      await DefaultService.postOfferOfferId(res.id, token, {
+      await DefaultService.addPictures(res.id, token, {
         image: selectedFile!,
       })
       setLoading(false)
@@ -160,6 +160,7 @@ const CreateOffer: NextPage = () => {
                   </Select>
                 </div>
                 <div>
+                  {/* TODO: multichoices */}
                   <div className="text-brand-red">Feature</div>
                   <Select
                     value={offerData?.features}

@@ -125,7 +125,7 @@ export const getServerSideProps: GetServerSideProps<{
   }
 
   try {
-    const carOffer = await DefaultService.getOfferOfferId(id)
+    const carOffer = await DefaultService.getCarOffer(id)
     return {
       props: {
         carOffer,

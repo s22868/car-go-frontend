@@ -15,4 +15,5 @@ export type Reservation = {
      */
     to: string;
     renter_id: string;
+    total_price: number;
 };
