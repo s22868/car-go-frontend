@@ -5,6 +5,5 @@
 export enum ReservationStatus {
     REQUESTED = 'requested',
     ACCEPTED = 'accepted',
-    FINISHED = 'finished',
-    IN_PROGRESS = 'in_progress',
+    DENIED = 'denied',
 }
