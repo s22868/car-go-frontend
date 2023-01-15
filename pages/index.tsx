@@ -14,7 +14,7 @@ const Home: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ carOffers }) => {
   return (
-    <div className="w-screen h-screen p-8 bg-brand-gray-400">
+    <div className="w-full h-screen p-8 bg-brand-gray-400">
       <Head>
         <title>Car-Go</title>
         <link rel="icon" href="/favicon.ico" />

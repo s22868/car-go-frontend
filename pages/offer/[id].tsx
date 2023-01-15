@@ -16,7 +16,7 @@ const Offer: NextPage<
     return null
   }
   return (
-    <div className="w-screen h-full min-h-screen p-8 bg-brand-gray-400">
+    <div className="w-full h-full min-h-screen p-8 bg-brand-gray-400">
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
