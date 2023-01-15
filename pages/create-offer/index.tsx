@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Spinner, Input, Button } from '@components/shared-components'
+import classNames from 'classnames'
 
 const offerFields: Partial<CarOfferReq> = {
   city: 'Gdansk',
@@ -21,15 +22,15 @@ const fuels: FuelType[] = [
   FuelType.GAS,
   FuelType.HYBRID,
 ]
-const features: Feature[] = [
-  Feature.AC,
-  Feature.AUX,
-  Feature.BLUETOOTH,
-  Feature.FOUR_BY_FOUR,
-  Feature.GPS,
-  Feature.HEATED_SEATS,
-  Feature.PANORAMA_ROOF,
-  Feature.USB,
+const features = [
+  { name: 'Klimatyzacja', value: Feature.AC },
+  { name: 'AUX', value: Feature.AUX },
+  { name: 'Bluetooth', value: Feature.BLUETOOTH },
+  { name: 'Napęd na 4', value: Feature.FOUR_BY_FOUR },
+  { name: 'GPS', value: Feature.GPS },
+  { name: 'Podgrzewane siedzenia', value: Feature.HEATED_SEATS },
+  { name: 'Szyberdach', value: Feature.PANORAMA_ROOF },
+  { name: 'USB', value: Feature.USB },
 ]
 
 const CreateOffer: NextPage = () => {
@@ -41,7 +42,7 @@ const CreateOffer: NextPage = () => {
     seats_amount: '',
     year: '',
     price_per_day: undefined,
-    features: [Feature.AC],
+    features: [],
     fuel_type: FuelType.DIESEL,
   })
   const [loading, setLoading] = useState(false)
@@ -57,14 +58,6 @@ const CreateOffer: NextPage = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    const test = Object.entries(offerData)
-      .map(([keys, value]) => {
-        if (!value) {
-          return false
-        }
-        return true
-      })
-      .filter((val) => !val)
 
     try {
       const token = 'Bearer ' + localStorage.getItem('cargo_token')!
@@ -82,7 +75,20 @@ const CreateOffer: NextPage = () => {
       setLoading(false)
     }
   }
-
+  const handleFeatures = (value: Feature) => {
+    const tempFeatures = offerData.features
+    if (offerData.features?.includes(value)) {
+      setOfferData((prev) => ({
+        ...prev,
+        features: tempFeatures?.filter((val) => val !== value),
+      }))
+    } else {
+      setOfferData((prev) => ({
+        ...prev,
+        features: [...prev.features!, value],
+      }))
+    }
+  }
   const handleFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedFile(e.target.files?.[0])
   }
@@ -169,42 +175,45 @@ const CreateOffer: NextPage = () => {
                   }
                   required
                 />
+                <Select
+                  required
+                  className="w-full"
+                  value={offerData?.fuel_type}
+                  onChange={(e) =>
+                    setOfferData((prev) => ({
+                      ...prev,
+                      fuel_type: e.target.value as FuelType,
+                    }))
+                  }
+                >
+                  {fuels.map((fuel) => (
+                    <option value={fuel}>{fuel}</option>
+                  ))}
+                </Select>
               </div>
-              <div className="flex gap-4">
+              <div className="flex max-w-4xl gap-4">
                 <div>
-                  <div className="text-brand-red">Fuel</div>
-                  <Select
-                    required
-                    value={offerData?.fuel_type}
-                    onChange={(e) =>
-                      setOfferData((prev) => ({
-                        ...prev,
-                        fuel_type: e.target.value as FuelType,
-                      }))
-                    }
-                  >
-                    {fuels.map((fuel) => (
-                      <option value={fuel}>{fuel}</option>
+                  <div className="text-xl font-semibold text-brand-gray-100">
+                    Wyposażenie
+                  </div>
+                  <div className="flex flex-wrap gap-4 mt-4">
+                    {features.map(({ name, value }) => (
+                      <div
+                        onClick={() => handleFeatures(value)}
+                        className={classNames(
+                          'border p-4 rounded-xl cursor-pointer',
+                          {
+                            'text-brand-gray-100 font-medium border-brand-red':
+                              offerData.features?.includes(value),
+                            'text-brand-gray-200 font-medium':
+                              !offerData.features?.includes(value),
+                          }
+                        )}
+                      >
+                        {name}
+                      </div>
                     ))}
-                  </Select>
-                </div>
-                <div>
-                  {/* TODO: multichoices */}
-                  <div className="text-brand-red">Feature</div>
-                  <Select
-                    required
-                    value={offerData?.features}
-                    onChange={(e) =>
-                      setOfferData((prev) => ({
-                        ...prev,
-                        features: [e.target.value as Feature],
-                      }))
-                    }
-                  >
-                    {features.map((feature) => (
-                      <option value={feature}>{feature}</option>
-                    ))}
-                  </Select>
+                  </div>
                 </div>
               </div>
             </div>
