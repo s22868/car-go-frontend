@@ -1,12 +1,10 @@
-import Input from '@components/shared-components/input/Input'
 import { CarOfferRes, DefaultService } from '@openapi'
 import NextImage from 'next/image'
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import Head from 'next/head'
 import React from 'react'
-import Button from '@components/shared-components/button/Button'
-import TopMenu from '@components/shared-components/top-menu/TopMenu'
-import CarStats from 'pages/offer/CarStats'
+import CarStats from '@components/offer/CarStats'
+import {Input, Button, TopMenu} from '@components/shared-components'
 
 const Offer: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -18,7 +16,7 @@ const Offer: NextPage<
     return null
   }
   return (
-    <div className="w-screen h-full min-h-screen p-8 bg-brand-gray-400">
+    <div className="w-full h-full min-h-screen p-8 bg-brand-gray-400">
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -125,7 +123,7 @@ export const getServerSideProps: GetServerSideProps<{
   }
 
   try {
-    const carOffer = await DefaultService.getOfferOfferId(id)
+    const carOffer = await DefaultService.getCarOffer(id)
     return {
       props: {
         carOffer,

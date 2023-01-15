@@ -1,12 +1,10 @@
-import { Spinner } from '@components/shared-components'
-import Button from '@components/shared-components/button/Button'
-import Input from '@components/shared-components/input/Input'
 import { DefaultService } from '@openapi'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FormEvent, useEffect, useState } from 'react'
+import { Input, Button, Spinner } from '@components/shared-components'
 
 const Register: NextPage = () => {
   const [email, setEmail] = useState('')

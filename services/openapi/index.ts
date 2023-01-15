@@ -18,7 +18,6 @@ export type { MakeReservation } from './models/MakeReservation';
 export type { MaskedProfile } from './models/MaskedProfile';
 export type { Point } from './models/Point';
 export type { Reservation } from './models/Reservation';
-export type { ReservationList } from './models/ReservationList';
 export { ReservationStatus } from './models/ReservationStatus';
 export type { UserCredentials } from './models/UserCredentials';
 export type { UserInfo } from './models/UserInfo';

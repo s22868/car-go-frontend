@@ -8,21 +8,19 @@ import Link from 'next/link'
 import { CarOfferRes, DefaultService } from '@openapi'
 import ListItem from '@components/home/list-item/ListItem'
 import Map from '@components/home/map/Map'
-import Input from '@components/shared-components/input/Input'
-import Button from '@components/shared-components/button/Button'
-import TopMenu from '@components/shared-components/top-menu/TopMenu'
+import { Button, TopMenu, Input } from '@components/shared-components'
 
 const Home: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
 > = ({ carOffers }) => {
   return (
-    <div className="w-screen h-screen p-8 bg-brand-gray-400">
+    <div className="w-full h-screen p-8 bg-brand-gray-400">
       <Head>
         <title>Car-Go</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="h-full">
-      <TopMenu/>
+        <TopMenu />
         <div className="flex gap-8 h-[90%]">
           <div className="flex flex-col flex-1 gap-4 p-1">
             <div className="flex justify-between gap-2">
@@ -32,14 +30,14 @@ const Home: NextPage<
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
                 placeholder="Data odbioru"
-                className="hidden md:block max-w-[185px]"
+                className="hidden md:block max-w-[185px] cursor-pointer"
               />
               <Input
                 size={12}
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
                 placeholder="Data zwrotu"
-                className="hidden md:block max-w-[185px]"
+                className="hidden md:block max-w-[185px] cursor-pointer"
               />
               <Button
                 type="button"

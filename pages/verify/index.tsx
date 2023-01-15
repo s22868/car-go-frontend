@@ -1,10 +1,9 @@
-import Button from '@components/shared-components/button/Button'
-import Input from '@components/shared-components/input/Input'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { FormEvent, useEffect, useState } from 'react'
 import { DefaultService } from '../../services/openapi'
+import { Input, Button } from '@components/shared-components'
 
 const Verify: NextPage = () => {
   const router = useRouter()
