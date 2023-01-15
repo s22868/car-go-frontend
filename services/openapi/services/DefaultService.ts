@@ -6,6 +6,9 @@ import type { CarOfferReq } from '../models/CarOfferReq';
 import type { CarOfferRes } from '../models/CarOfferRes';
 import type { MakeReservation } from '../models/MakeReservation';
 import type { Reservation } from '../models/Reservation';
+import type { ReservationDecision } from '../models/ReservationDecision';
+import type { ResetPassword } from '../models/ResetPassword';
+import type { ResetToken } from '../models/ResetToken';
 import type { UserCredentials } from '../models/UserCredentials';
 import type { UserInfo } from '../models/UserInfo';
 import type { UserProfile } from '../models/UserProfile';
@@ -360,6 +363,106 @@ authorization: string,
                 'Authorization': authorization,
             },
             errors: {
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * Reset password
+     * @param email 
+     * @returns ResetToken OK
+     * @throws ApiError
+     */
+    public static resetPassword(
+email: string,
+): CancelablePromise<ResetToken> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/reset/{email}',
+            path: {
+                'email': email,
+            },
+            errors: {
+                400: `Bad Request`,
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * Verify reset password
+     * @param authorization Bearer token
+     * @param requestBody 
+     * @returns void 
+     * @throws ApiError
+     */
+    public static verifyResetPassword(
+authorization: string,
+requestBody?: ResetPassword,
+): CancelablePromise<void> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/reset/verify',
+            headers: {
+                'Authorization': authorization,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: `Bad Request`,
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * Get user's offers
+     * @param authorization Bearer token
+     * @returns CarOfferRes OK
+     * @throws ApiError
+     */
+    public static getUserOffers(
+authorization: string,
+): CancelablePromise<Array<CarOfferRes>> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/user/offers',
+            headers: {
+                'Authorization': authorization,
+            },
+            errors: {
+                401: `Unauthorized`,
+            },
+        });
+    }
+
+    /**
+     * Accept or decline reservation
+     * @param reservationId 
+     * @param authorization Bearer token
+     * @param requestBody 
+     * @returns void 
+     * @throws ApiError
+     */
+    public static chooseReservation(
+reservationId: string,
+authorization?: string,
+requestBody?: ReservationDecision,
+): CancelablePromise<void> {
+        return __request(OpenAPI, {
+            method: 'POST',
+            url: '/reservations/{reservationId}',
+            path: {
+                'reservationId': reservationId,
+            },
+            headers: {
+                'Authorization': authorization,
+            },
+            body: requestBody,
+            mediaType: 'application/json',
+            errors: {
+                400: `Bad Request`,
                 401: `Unauthorized`,
             },
         });
