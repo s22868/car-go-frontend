@@ -22,7 +22,7 @@ const Modal: FC<ModalProps> = ({ show, onClose, title, children }) => {
   return ReactDOM.createPortal(
     <div className="absolute top-0 bottom-0 left-0 right-0 flex items-center justify-center w-screen h-screen backdrop-blur">
       <div className="p-8 bg-brand-gray-300 rounded-2xl">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <div className="text-2xl font-semibold text-brand-gray-100">
             {title}
           </div>
