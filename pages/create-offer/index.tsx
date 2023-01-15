@@ -4,7 +4,7 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { Spinner, Input, Button } from '@components/shared-components'
+import { Spinner, Input, Button, TopMenu } from '@components/shared-components'
 import classNames from 'classnames'
 
 const offerFields: Partial<CarOfferReq> = {
@@ -94,13 +94,18 @@ const CreateOffer: NextPage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-brand-gray-400">
+    <div className="w-full h-screen p-8 bg-brand-gray-400">
       <Head>
         <title>Car-Go - Dodaj oferte</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex items-center justify-center flex-1 w-full gap-4 px-20">
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <main>
+        <TopMenu />
+        <form
+          className="flex items-center justify-center flex-1 w-full gap-4 px-20"
+          onSubmit={handleSubmit}
+          encType="multipart/form-data"
+        >
           <div className="flex flex-col gap-6 p-6 bg-brand-gray-300 rounded-2xl">
             <h1 className="mb-4 text-2xl font-semibold text-brand-gray-100">
               Dodaj ogłoszenie
