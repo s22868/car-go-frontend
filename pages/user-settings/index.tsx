@@ -111,12 +111,14 @@ const UserSettings: NextPage = () => {
                       onChange={(e) => setFirstName(e.target.value)}
                       tabIndex={-1}
                       placeholder="Imie"
+                      required
                     />
                     <Input
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       tabIndex={-1}
                       placeholder="Nazwisko"
+                      required
                     />
                   </div>
                   <div>
@@ -148,6 +150,9 @@ const UserSettings: NextPage = () => {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       tabIndex={-1}
+                      minLength={9}
+                      maxLength={9}
+                      required
                       placeholder="Telefon"
                     />
                   </div>
@@ -178,6 +183,7 @@ const UserSettings: NextPage = () => {
                       onChange={(e) => setLicense(e.target.value)}
                       tabIndex={-1}
                       placeholder="Prawo jazdy"
+                      required
                     />
                   </div>
                   <div>
@@ -208,7 +214,7 @@ const UserSettings: NextPage = () => {
                       max="2005-01-01"
                       type="date"
                       tabIndex={-1}
-                      placeholder="Imie"
+                      required
                     />
                   </div>
                   <div>
