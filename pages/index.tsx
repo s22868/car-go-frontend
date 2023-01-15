@@ -22,7 +22,7 @@ const Home: NextPage<
       <main className="h-full">
         <TopMenu />
         <div className="flex gap-8 h-[90%]">
-          <div className="flex flex-col flex-1 gap-4 p-1">
+          <div className="flex flex-col flex-1 gap-4">
             <div className="flex justify-between gap-2">
               <Input size={12} placeholder="Lokalizacja" />
               <Input
