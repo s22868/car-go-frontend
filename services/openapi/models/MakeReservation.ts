@@ -8,4 +8,5 @@ export type MakeReservation = {
     from: string;
     to: string;
     insurance: Insurance;
+    offer_id: string;
 };
