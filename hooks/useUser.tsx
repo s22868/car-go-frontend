@@ -15,6 +15,7 @@ interface IUserContext {
   setUser: Dispatch<SetStateAction<IUserContext['user']>>
   login: (email: string, password: string) => Promise<void>
   logout: () => void
+  getUser: (accessToken?: string) => Promise<void>
 }
 
 export const UserContext = createContext<Partial<IUserContext>>({})
@@ -56,7 +57,7 @@ export const UserProvider: FC<PropsWithChildren> = ({ children }) => {
   }, [])
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, login, logout, getUser }}>
       {children}
     </UserContext.Provider>
   )
