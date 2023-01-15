@@ -6,7 +6,7 @@ import Head from 'next/head'
 import React from 'react'
 import Button from '@components/shared-components/button/Button'
 import TopMenu from '@components/shared-components/top-menu/TopMenu'
-import CarStats from 'pages/offer/CarStats'
+import CarStats from '@components/offer/CarStats'
 
 const Offer: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
