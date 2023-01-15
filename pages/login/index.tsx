@@ -2,11 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { FormEvent, useEffect, useState } from 'react'
-import { Spinner } from '@components/shared-components'
 import { useRouter } from 'next/router'
 import { UseUser } from 'hooks/useUser'
-import Input from '@components/shared-components/input/Input'
-import Button from '@components/shared-components/button/Button'
+import { Input, Button, Spinner } from '@components/shared-components'
 
 const Login: NextPage = () => {
   const [email, setEmail] = useState('')
@@ -53,7 +51,10 @@ const Login: NextPage = () => {
         <h1 className="mb-8 text-2xl font-semibold md:mb-12 text-brand-gray-100">
           Zaloguj się
         </h1>
-        <form className="flex flex-col gap-4 md:gap-6 md:w-[330px]" onSubmit={handleLogin}>
+        <form
+          className="flex flex-col gap-4 md:gap-6 md:w-[330px]"
+          onSubmit={handleLogin}
+        >
           <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}

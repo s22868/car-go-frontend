@@ -1,2 +1,6 @@
 export { default as Spinner } from './spinner/Spinner'
 export { default as Loading } from './loading/Loading'
+export { default as Select } from './select/Select'
+export { default as TopMenu } from './top-menu/TopMenu'
+export { default as Input } from './input/Input'
+export { default as Button } from './button/Button'

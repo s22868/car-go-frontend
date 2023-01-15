@@ -1,12 +1,10 @@
-import Input from '@components/shared-components/input/Input'
 import { CarOfferRes, DefaultService } from '@openapi'
 import NextImage from 'next/image'
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import Head from 'next/head'
 import React from 'react'
-import Button from '@components/shared-components/button/Button'
-import TopMenu from '@components/shared-components/top-menu/TopMenu'
 import CarStats from '@components/offer/CarStats'
+import {Input, Button, TopMenu} from '@components/shared-components'
 
 const Offer: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>

@@ -3,9 +3,8 @@ import Head from 'next/head'
 import { UseUser } from 'hooks/useUser'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import Input from '@components/shared-components/input/Input'
 import Link from 'next/link'
-import Button from '@components/shared-components/button/Button'
+import { Input, Button } from '@components/shared-components'
 
 const UserSettings: NextPage = () => {
   const router = useRouter()

@@ -1,12 +1,10 @@
-import { Spinner } from '@components/shared-components'
-import Button from '@components/shared-components/button/Button'
-import Input from '@components/shared-components/input/Input'
 import Select from '@components/shared-components/select/Select'
 import { CarOfferReq, DefaultService, Feature, FuelType } from '@openapi'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
+import { Spinner, Input, Button } from '@components/shared-components'
 
 const offerFields: Partial<CarOfferReq> = {
   city: 'Gdansk',
@@ -203,11 +201,15 @@ const CreateOffer: NextPage = () => {
                 />
               </div>
             </div>
-          <div className="flex justify-center mt-6">
-            <Button disabled={loading} type="submit" className="px-4 w-[400px]">
-              {loading ? <Spinner /> : 'Dodaj ogłoszenie'}
-            </Button>
-          </div>
+            <div className="flex justify-center mt-6">
+              <Button
+                disabled={loading}
+                type="submit"
+                className="px-4 w-[400px]"
+              >
+                {loading ? <Spinner /> : 'Dodaj ogłoszenie'}
+              </Button>
+            </div>
           </div>
         </form>
         <div className="text-red-600">{error}</div>
