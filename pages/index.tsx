@@ -62,7 +62,7 @@ const Home: NextPage<
               className="flex justify-between gap-2"
             >
               <Input
-                size={12}
+                className='w-[185px]'
                 placeholder="Lokalizacja"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
@@ -70,7 +70,7 @@ const Home: NextPage<
               <Input
                 value={fromDate}
                 onChange={(e) => setFromDate(e.target.value)}
-                size={12}
+                
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
                 placeholder="Data odbioru"
@@ -79,7 +79,7 @@ const Home: NextPage<
               <Input
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
-                size={12}
+                
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
                 placeholder="Data zwrotu"
