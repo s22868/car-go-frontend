@@ -47,7 +47,7 @@ const PayModal: FC<PayModalProps> = ({ onClose }) => {
           <Input
             dark
             placeholder="Imię"
-            size={12}
+            className="w-[165px] md:w-[185px]"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             required
@@ -55,7 +55,7 @@ const PayModal: FC<PayModalProps> = ({ onClose }) => {
           <Input
             dark
             placeholder="Nazwisko"
-            size={12}
+            className="w-[165px] md:w-[185px]"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             required
@@ -73,13 +73,13 @@ const PayModal: FC<PayModalProps> = ({ onClose }) => {
             required
           />
         </div>
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-2">
           <Input
             dark
             placeholder="Miesiac"
             value={month}
             onChange={(e) => setMonth(e.target.value)}
-            size={4}
+            className="w-[110px] md:w-[120px]"
             required
             minLength={1}
             maxLength={2}
@@ -89,12 +89,12 @@ const PayModal: FC<PayModalProps> = ({ onClose }) => {
             placeholder="Rok"
             value={year}
             onChange={(e) => setYear(e.target.value)}
-            size={4}
+            className="w-[110px] md:w-[120px]"
             required
             minLength={4}
             maxLength={4}
           />
-          <Input dark placeholder="CVC" size={4} minLength={3} maxLength={3} />
+          <Input dark placeholder="CVC" className="w-[110px] md:w-[120px]" minLength={3} maxLength={3} />
         </div>
         <div>
           <Input
