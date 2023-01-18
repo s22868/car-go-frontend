@@ -111,7 +111,7 @@ const Offer: NextPage<
               onSubmit={handleSubmit}
               className="flex flex-col gap-6 p-6 bg-brand-gray-300 rounded-2xl h-fit"
             >
-              <div className="text-2xl font-semibold text-brand-gray-100">
+              <div className="text-base font-semibold md:text-2xl text-brand-gray-100">
                 Rezerwacja
               </div>
               <Input
