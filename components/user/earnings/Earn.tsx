@@ -10,7 +10,7 @@ interface EarnProps {
 
 const Earn: FC<EarnProps> = ({ dateFrom, dateTo, price, make, model }) => {
   return (
-    <div className="flex items-center justify-between p-6 bg-brand-gray-400 rounded-2xl">
+    <div className="flex items-center justify-between p-4 md:p-6 bg-brand-gray-400 rounded-2xl">
       <div className='flex items-center gap-4'>
         <div>
           <p className='text-xs font-medium text-brand-gray-200 md:text-base first-letter:uppercase'>{make}</p>

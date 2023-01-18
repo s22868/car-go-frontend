@@ -231,7 +231,7 @@ const CreateOffer: NextPage = () => {
                 type="file"
                 accept="image/png, image/jpeg"
                 onChange={handleFileInput}
-                className="w-full mb-2"
+                className="w-[200px] mb-2"
               />
             </div>
             <div>
