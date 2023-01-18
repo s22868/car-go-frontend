@@ -92,7 +92,7 @@ const UserSettings: NextPage = () => {
   }
 
   return (
-    <div className="w-full h-full min-h-screen p-8 bg-brand-gray-400">
+    <div className="w-full h-full min-h-screen p-4 md:p-8 bg-brand-gray-400">
       <Head>
         <title>Car-Go - Ustawienia profilu</title>
         <link rel="icon" href="/favicon.ico" />

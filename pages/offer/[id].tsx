@@ -47,7 +47,7 @@ const Offer: NextPage<
     return null
   }
   return (
-    <div className="w-full h-full min-h-screen p-8 bg-brand-gray-400">
+    <div className="w-full h-full min-h-screen p-4 md:p-8 bg-brand-gray-400">
       <Head>
         <title>{title}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -56,7 +56,7 @@ const Offer: NextPage<
         <TopMenu />
         <div className="flex flex-col items-center">
           <div className="flex flex-col justify-center w-full gap-8 lg:w-auto xl:flex-row">
-            <div className="flex flex-col lg:w-[822px] w-full gap-6 p-6 bg-brand-gray-300 rounded-2xl">
+            <div className="flex flex-col lg:w-[822px] w-full gap-6 md:p-6 p-4 bg-brand-gray-300 rounded-2xl">
               <div className="flex gap-2 text-xl font-semibold md:text-2xl text-brand-gray-100">
                 <p className="first-letter:uppercase">{carOffer.make}</p>
                 <p className="first-letter:uppercase">{carOffer.model}</p>
@@ -109,7 +109,7 @@ const Offer: NextPage<
             </div>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-6 p-6 bg-brand-gray-300 rounded-2xl h-fit"
+              className="flex flex-col gap-6 p-4 md:p-6 bg-brand-gray-300 rounded-2xl h-fit"
             >
               <div className="text-base font-semibold md:text-2xl text-brand-gray-100">
                 Rezerwacja
