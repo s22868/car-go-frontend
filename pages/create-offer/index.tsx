@@ -106,7 +106,7 @@ const CreateOffer: NextPage = () => {
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
-          <div className="flex flex-col p-4 md:p-6 bg-brand-gray-300 rounded-2xl">
+          <div className="flex flex-col p-4 mx-4 md:mx-0 md:p-6 bg-brand-gray-300 rounded-2xl">
             <h1 className="mb-2 text-base font-semibold md:mb-4 md:text-2xl text-brand-gray-100">
               Dodaj ogłoszenie
             </h1>
