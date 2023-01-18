@@ -102,7 +102,7 @@ const CreateOffer: NextPage = () => {
       <main>
         <TopMenu />
         <form
-          className="flex items-center justify-center"
+          className="flex items-center justify-center px-4"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
