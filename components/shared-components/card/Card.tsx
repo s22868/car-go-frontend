@@ -12,7 +12,7 @@ interface CardProps {
 
 const Card: FC<CardProps> = ({ number, firstName, lastName, month, year }) => {
   return (
-    <div className="bg-brand-gray-400 rounded-2xl p-7 w-[380px] cursor-default">
+    <div className="bg-brand-gray-400 rounded-2xl md:p-7 p-5 md:w-[380px] cursor-default">
       <div className="flex items-center justify-between">
         <div>
           <Logo />

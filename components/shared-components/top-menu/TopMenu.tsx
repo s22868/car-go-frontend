@@ -15,7 +15,7 @@ const TopMenu: FC = () => {
       {user ? (
         <div className="flex flex-col items-end">
           <Link href={'/user-settings'}>
-            <p className="hidden text-sm sm:block text-brand-gray-200">
+            <p className="text-sm text-brand-gray-200">
               {user.email}
             </p>
           </Link>

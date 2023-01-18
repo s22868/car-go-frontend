@@ -94,7 +94,7 @@ const CreateOffer: NextPage = () => {
   }
 
   return (
-    <div className="w-full h-screen p-8 bg-brand-gray-400">
+    <div className="w-full h-full min-h-screen p-8 bg-brand-gray-400">
       <Head>
         <title>Car-Go - Dodaj oferte</title>
         <link rel="icon" href="/favicon.ico" />
@@ -106,15 +106,15 @@ const CreateOffer: NextPage = () => {
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
-          <div className="flex flex-col gap-6 p-6 bg-brand-gray-300 rounded-2xl">
-            <h1 className="mb-4 text-2xl font-semibold text-brand-gray-100">
+          <div className="flex flex-col gap-6 p-5 md:p-6 bg-brand-gray-300 rounded-2xl">
+            <h1 className="mb-4 text-base font-semibold md:text-2xl text-brand-gray-100">
               Dodaj ogłoszenie
             </h1>
             <div className="flex flex-col gap-4">
-              <p className="text-xl font-semibold text-brand-gray-100">
+              <p className="text-sm font-semibold md:text-xl text-brand-gray-100">
                 Informacje dotyczące pojazdu
               </p>
-              <div className="flex gap-6">
+              <div className="flex flex-col gap-3 md:gap-6 lg:flex-row">
                 <Input
                   dark
                   placeholder="Marka"
@@ -153,7 +153,7 @@ const CreateOffer: NextPage = () => {
                   required
                 />
               </div>
-              <div className="flex gap-6">
+              <div className="flex flex-col gap-6 lg:flex-row">
                 <Input
                   dark
                   type="number"
@@ -182,7 +182,7 @@ const CreateOffer: NextPage = () => {
                 />
                 <Select
                   required
-                  className="w-full"
+                  className="lg:w-[249px] w-full"
                   value={offerData?.fuel_type}
                   onChange={(e) =>
                     setOfferData((prev) => ({
@@ -198,7 +198,7 @@ const CreateOffer: NextPage = () => {
               </div>
               <div className="flex max-w-4xl gap-4">
                 <div>
-                  <div className="text-xl font-semibold text-brand-gray-100">
+                  <div className="text-sm font-semibold md:text-xl text-brand-gray-100">
                     Wyposażenie
                   </div>
                   <div className="flex flex-wrap gap-4 mt-4">
@@ -206,7 +206,7 @@ const CreateOffer: NextPage = () => {
                       <div
                         onClick={() => handleFeatures(value)}
                         className={classNames(
-                          'border p-4 rounded-xl cursor-pointer',
+                          'border p-4 rounded-xl cursor-pointer text-sm md:text-base',
                           {
                             'text-brand-gray-100 font-medium border-brand-red':
                               offerData.features?.includes(value),
@@ -223,7 +223,7 @@ const CreateOffer: NextPage = () => {
               </div>
             </div>
             <div>
-              <p className="mb-4 text-xl font-semibold text-brand-gray-100">
+              <p className="mb-4 text-sm font-semibold md:text-xl text-brand-gray-100">
                 Zdjęcia pojazdu
               </p>
               <input
@@ -234,10 +234,10 @@ const CreateOffer: NextPage = () => {
               />
             </div>
             <div>
-              <p className="mb-4 text-xl font-semibold text-brand-gray-100">
+              <p className="mb-4 text-sm font-semibold md:text-xl text-brand-gray-100">
                 Informacje dotyczące wynajmu
               </p>
-              <div className="flex gap-6">
+              <div className="flex flex-col gap-4 md:gap-6 lg:flex-row">
                 <Input
                   dark
                   placeholder="Lokalizacja"
@@ -265,11 +265,11 @@ const CreateOffer: NextPage = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-center mt-6">
+            <div className="flex justify-center md:mt-6">
               <Button
                 disabled={loading}
                 type="submit"
-                className="px-4 w-[400px]"
+                className="px-4 w-full md:w-[400px]"
               >
                 {loading ? <Spinner /> : 'Dodaj ogłoszenie'}
               </Button>
