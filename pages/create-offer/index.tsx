@@ -94,7 +94,7 @@ const CreateOffer: NextPage = () => {
   }
 
   return (
-    <div className="w-full h-full min-h-screen p-8 bg-brand-gray-400">
+    <div className="w-full h-full min-h-screen p-4 md:p-8 bg-brand-gray-400">
       <Head>
         <title>Car-Go - Dodaj oferte</title>
         <link rel="icon" href="/favicon.ico" />
@@ -102,12 +102,12 @@ const CreateOffer: NextPage = () => {
       <main>
         <TopMenu />
         <form
-          className="flex items-center justify-center flex-1 w-full gap-4 px-20"
+          className="flex items-center justify-center"
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
-          <div className="flex flex-col gap-6 px-3 py-4 md:py-6 md:px-6 bg-brand-gray-300 rounded-2xl">
-            <h1 className="text-base font-semibold md:mb-4 md:text-2xl text-brand-gray-100">
+          <div className="flex flex-col p-4 md:p-6 bg-brand-gray-300 rounded-2xl">
+            <h1 className="mb-2 text-base font-semibold md:mb-4 md:text-2xl text-brand-gray-100">
               Dodaj ogłoszenie
             </h1>
             <div className="flex flex-col gap-4">
@@ -201,7 +201,7 @@ const CreateOffer: NextPage = () => {
                   <div className="text-sm font-semibold md:text-xl text-brand-gray-100">
                     Wyposażenie
                   </div>
-                  <div className="flex flex-wrap gap-4 mt-4">
+                  <div className="flex flex-wrap gap-2 mt-4 md:gap-4">
                     {features.map(({ name, value }) => (
                       <div
                         onClick={() => handleFeatures(value)}
@@ -223,7 +223,7 @@ const CreateOffer: NextPage = () => {
               </div>
             </div>
             <div>
-              <p className="mb-4 text-sm font-semibold md:text-xl text-brand-gray-100">
+              <p className="mt-2 mb-4 text-sm font-semibold md:text-xl text-brand-gray-100">
                 Zdjęcia pojazdu
               </p>
               <input
@@ -231,6 +231,7 @@ const CreateOffer: NextPage = () => {
                 type="file"
                 accept="image/png, image/jpeg"
                 onChange={handleFileInput}
+                className="w-full mb-2"
               />
             </div>
             <div>
