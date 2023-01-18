@@ -103,7 +103,7 @@ const UserSettings: NextPage = () => {
           <div className="pt-4 ">
             <UserMenu />
           </div>
-          <div className="w-full p-6 md:p-8 xl:w-7/12 bg-brand-gray-300 rounded-2xl">
+          <div className="w-full p-5 md:p-8 xl:w-7/12 bg-brand-gray-300 rounded-2xl">
             <div className="flex items-start justify-between mb-6">
               <h1 className="text-base font-semibold md:text-2xl text-brand-gray-100">
                 Dane osobowe
