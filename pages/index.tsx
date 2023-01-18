@@ -111,7 +111,7 @@ const Home: NextPage<
               ))}
             </div>
           </div>
-          <div className="flex-1 hidden overflow-hidden rounded-lg lg:block">
+          <div className="flex-1 hidden overflow-hidden rounded-lg xl:block">
             <Map
               markers={carOffersData
                 .filter((offer) => offer.point)
