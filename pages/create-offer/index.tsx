@@ -106,8 +106,8 @@ const CreateOffer: NextPage = () => {
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
-          <div className="flex flex-col gap-6 p-5 md:p-6 bg-brand-gray-300 rounded-2xl">
-            <h1 className="mb-4 text-base font-semibold md:text-2xl text-brand-gray-100">
+          <div className="flex flex-col gap-6 px-3 py-4 md:py-6 md:px-6 bg-brand-gray-300 rounded-2xl">
+            <h1 className="text-base font-semibold md:mb-4 md:text-2xl text-brand-gray-100">
               Dodaj ogłoszenie
             </h1>
             <div className="flex flex-col gap-4">
@@ -153,7 +153,7 @@ const CreateOffer: NextPage = () => {
                   required
                 />
               </div>
-              <div className="flex flex-col gap-6 lg:flex-row">
+              <div className="flex flex-col gap-3 md:gap-6 lg:flex-row">
                 <Input
                   dark
                   type="number"
@@ -237,7 +237,7 @@ const CreateOffer: NextPage = () => {
               <p className="mb-4 text-sm font-semibold md:text-xl text-brand-gray-100">
                 Informacje dotyczące wynajmu
               </p>
-              <div className="flex flex-col gap-4 md:gap-6 lg:flex-row">
+              <div className="flex flex-col gap-3 md:gap-6 lg:flex-row">
                 <Input
                   dark
                   placeholder="Lokalizacja"
