@@ -1,12 +1,13 @@
 import { CarOfferRes } from '@openapi'
 import React, { FC } from 'react'
+import { features } from '../../pages/create-offer'
 
 interface CarStatsProps {
   carOffer: CarOfferRes
 }
 
 const CarStats: FC<CarStatsProps> = ({ carOffer }) => {
-  if(!carOffer){
+  if (!carOffer) {
     return null
   }
   return (
@@ -42,6 +43,18 @@ const CarStats: FC<CarStatsProps> = ({ carOffer }) => {
         <span className="ml-auto text-base font-medium text-brand-gray-200">
           {carOffer.horsepower}
         </span>
+      </div>
+      <div className="flex flex-col">
+        <span className="text-base font-medium text-brand-gray-200">
+          Dodatki
+        </span>
+        <div className="flex flex-wrap gap-4 mt-2">
+          {carOffer.features.map((val) => (
+            <div className="p-4 font-medium border cursor-pointer rounded-xl text-brand-gray-100 border-brand-red">
+              {features.find(({ value }) => value === val)!.name}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

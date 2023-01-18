@@ -22,7 +22,7 @@ const fuels: FuelType[] = [
   FuelType.GAS,
   FuelType.HYBRID,
 ]
-const features = [
+export const features = [
   { name: 'Klimatyzacja', value: Feature.AC },
   { name: 'AUX', value: Feature.AUX },
   { name: 'Bluetooth', value: Feature.BLUETOOTH },
