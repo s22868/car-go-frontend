@@ -106,7 +106,7 @@ const CreateOffer: NextPage = () => {
           onSubmit={handleSubmit}
           encType="multipart/form-data"
         >
-          <div className="flex flex-col p-4 mx-4 md:mx-0 md:p-6 bg-brand-gray-300 rounded-2xl">
+          <div className="flex flex-col p-5 md:p-6 bg-brand-gray-300 rounded-2xl">
             <h1 className="mb-2 text-base font-semibold md:mb-4 md:text-2xl text-brand-gray-100">
               Dodaj ogłoszenie
             </h1>
@@ -231,7 +231,7 @@ const CreateOffer: NextPage = () => {
                 type="file"
                 accept="image/png, image/jpeg"
                 onChange={handleFileInput}
-                className="w-[200px] mb-2"
+                className="w-full mb-2"
               />
             </div>
             <div>
@@ -266,7 +266,7 @@ const CreateOffer: NextPage = () => {
                 />
               </div>
             </div>
-            <div className="flex justify-center md:mt-6">
+            <div className="flex justify-center mt-4 md:mt-6">
               <Button
                 disabled={loading}
                 type="submit"
