@@ -55,14 +55,14 @@ const Offer: NextPage<
       <main>
         <TopMenu />
         <div className="flex flex-col items-center">
-          <div className="flex justify-center gap-8">
-            <div className="flex flex-col w-[822px] gap-6 p-6 bg-brand-gray-300 rounded-2xl">
-              <div className="flex gap-2 text-2xl font-semibold text-brand-gray-100">
+          <div className="flex flex-col justify-center w-full gap-8 lg:w-auto xl:flex-row">
+            <div className="flex flex-col lg:w-[822px] w-full gap-6 p-6 bg-brand-gray-300 rounded-2xl">
+              <div className="flex gap-2 text-xl font-semibold md:text-2xl text-brand-gray-100">
                 <p className="first-letter:uppercase">{carOffer.make}</p>
                 <p className="first-letter:uppercase">{carOffer.model}</p>
               </div>
               <div className="flex">
-                <div className="relative w-[509px] h-[254px] rounded-xl overflow-hidden">
+                <div className="relative w-[509px] h-[254px] rounded-xl overflow-hidden ">
                   <NextImage
                     className="object-cover"
                     src={carOffer.images[0].url || ''}
@@ -89,18 +89,18 @@ const Offer: NextPage<
               </div>
               <div className="px-6">
                 <div className="flex">
-                  <span className="text-xl font-medium text-brand-gray-200">
+                  <span className="text-base font-medium md:text-xl text-brand-gray-200">
                     Lokalizacja pojazdu
                   </span>
-                  <span className="ml-auto text-xl font-medium text-brand-gray-200">
+                  <span className="ml-auto text-base font-medium text-right md:text-xl text-brand-gray-200">
                     Cena za dobę
                   </span>
                 </div>
                 <div className="flex">
-                  <span className="text-2xl font-semibold text-brand-gray-100">
+                  <span className="text-lg font-semibold md:text-2xl text-brand-gray-100">
                     {carOffer.city}
                   </span>
-                  <span className="ml-auto text-2xl font-semibold text-brand-gray-100">
+                  <span className="ml-auto text-lg font-semibold md:text-2xl text-brand-gray-100">
                     {carOffer.price_per_day} PLN
                   </span>
                 </div>
@@ -115,7 +115,7 @@ const Offer: NextPage<
                 Rezerwacja
               </div>
               <Input
-                className="w-[300px] cursor-pointer"
+                className="xl:w-[300px] w-full cursor-pointer"
                 dark
                 placeholder="Data odbioru"
                 value={dateFrom}
@@ -126,7 +126,7 @@ const Offer: NextPage<
                 required
               />
               <Input
-                className="w-[300px] cursor-pointer"
+                className="xl:w-[300px] w-full cursor-pointer"
                 dark
                 placeholder="Data zwrotu"
                 value={dateTo}

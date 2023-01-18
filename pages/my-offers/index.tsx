@@ -33,24 +33,24 @@ const MyOffers: FC = () => {
     }
   }, [])
   return (
-    <div className="w-full h-screen p-8 bg-brand-gray-400">
+    <div className="w-full h-full min-h-screen p-8 bg-brand-gray-400">
       <Head>
         <title>Car-Go - Moje oferty</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
         <TopMenu />
-        <div className="flex gap-8 px-36">
+        <div className="flex flex-col gap-8 px-4 xl:flex-row md:px-8 lg:px-36">
           <div className="pt-4">
             <UserMenu />
           </div>
-          <div className="w-full p-8 lg:w-2/4 bg-brand-gray-300 rounded-2xl">
-            <div className="flex items-start justify-between ">
-              <h1 className="text-2xl font-semibold text-brand-gray-100">
+          <div className="w-full p-6 md:p-8 xl:w-7/12 bg-brand-gray-300 rounded-2xl">
+            <div className="flex flex-col items-start justify-between md:flex-row ">
+              <h1 className="text-base font-semibold md:text-2xl text-brand-gray-100">
                 Moje ogłoszenia
               </h1>
-              <Link href={'/create-offer'}>
-                <Button type="button" className="px-4">
+              <Link href={'/create-offer'} className="hidden md:block">
+                <Button type="button" className="px-2">
                   Dodaj ogłoszenie
                 </Button>
               </Link>
@@ -71,6 +71,11 @@ const MyOffers: FC = () => {
                 ))}
               </div>
             </div>
+            <Link href={'/create-offer'} className="block w-full mt-4 md:hidden">
+                <Button type="button" className="w-full px-2">
+                  Dodaj ogłoszenie
+                </Button>
+              </Link>
           </div>
         </div>
       </main>

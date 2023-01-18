@@ -13,14 +13,14 @@ const Earn: FC<EarnProps> = ({ dateFrom, dateTo, price, make, model }) => {
     <div className="flex items-center justify-between p-6 bg-brand-gray-400 rounded-2xl">
       <div className='flex items-center gap-4'>
         <div>
-          <p className='font-medium text-brand-gray-200 first-letter:uppercase'>{make}</p>
-          <p className='text-xl font-semibold text-brand-gray-100 first-letter:uppercase'>{model}</p>
+          <p className='text-xs font-medium text-brand-gray-200 md:text-base first-letter:uppercase'>{make}</p>
+          <p className='text-base font-semibold md:text-xl text-brand-gray-100 first-letter:uppercase'>{model}</p>
         </div>
-        <div className='font-medium text-brand-gray-100'>
+        <div className='hidden font-medium text-brand-gray-100 md:block'>
           {dateFrom} - {dateTo}
         </div>
       </div>
-      <div className='text-lg font-medium text-brand-gray-100'>+{price} PLN</div>
+      <div className='text-sm font-medium md:text-lg text-brand-gray-100'>+{price} PLN</div>
     </div>
   )
 }

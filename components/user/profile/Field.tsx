@@ -23,17 +23,17 @@ const Field: FC<FieldProps> = ({
   return (
     <div
       className={classNames(
-        'w-full p-6 rounded-2xl bg-brand-gray-400 h-[103px] transition-all overflow-hidden space-y-7',
+        'w-full md:p-6 p-4 rounded-2xl bg-brand-gray-400 md:h-[103px] h-[81px] transition-all overflow-hidden space-y-7',
         {
-          'min-h-[260px]': active,
-          'min-h-[103px]': !active,
+          'md:min-h-[260px] min-h-[240px]': active,
+          'md:min-h-[103px] min-h-[81px]': !active,
         }
       )}
     >
       <div className="flex items-center justify-between">
         <div>
-          <div className="font-medium text-brand-gray-200">{title}</div>
-          <div className="text-xl font-semibold text-brand-gray-100">
+          <div className="text-xs font-medium md:text-base text-brand-gray-200">{title}</div>
+          <div className="text-sm font-semibold md:text-xl text-brand-gray-100">
             {value}
           </div>
         </div>
@@ -41,7 +41,7 @@ const Field: FC<FieldProps> = ({
           <button
             type="button"
             onClick={() => setActive((prev) => !prev)}
-            className="font-medium underline cursor-pointer text-brand-gray-100"
+            className="text-sm font-medium underline cursor-pointer md:text-base text-brand-gray-100"
           >
             {active ? 'Anuluj' : 'Edytuj'}
           </button>

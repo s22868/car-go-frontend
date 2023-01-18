@@ -35,7 +35,7 @@ const Offer: FC<OfferProps> = ({ img, make, model, price, id, refresh }) => {
   }
   return (
     <div className="flex gap-5 p-4 bg-brand-gray-400 rounded-2xl">
-      <div className="relative h-[100px] w-[180px] rounded-2xl overflow-hidden bg-brand-gray-200">
+      <div className="relative h-[100px] w-[180px] rounded-2xl overflow-hidden bg-brand-gray-200 hidden md:block">
         {img && (
           <NextImage
             className="object-cover"
@@ -46,22 +46,22 @@ const Offer: FC<OfferProps> = ({ img, make, model, price, id, refresh }) => {
         )}
       </div>
       <div className="flex flex-col">
-        <p className="text-base font-medium text-brand-gray-200 first-letter:uppercase">
+        <p className="text-sm font-medium md:text-base text-brand-gray-200 first-letter:uppercase">
           {make}
         </p>
-        <p className="text-2xl font-semibold text-brand-gray-100 first-letter:uppercase">
+        <p className="text-base font-semibold md:text-2xl text-brand-gray-100 first-letter:uppercase">
           {model}
         </p>
-        <div className="flex items-end text-2xl font-semibold text-brand-gray-100">
+        <div className="flex items-end text-base font-semibold md:text-2xl text-brand-gray-100">
           {price} PLN/
-          <p className="text-base font-medium text-brand-gray-200">dzień</p>
+          <p className="text-xs font-medium md:text-base text-brand-gray-200">dzień</p>
         </div>
       </div>
       <button
         type="button"
         disabled={loading}
         onClick={() => setIsModalOpen(true)}
-        className="self-end ml-auto text-lg font-medium underline cursor-pointer text-brand-gray-100 underline-offset-4"
+        className="self-end ml-auto text-sm font-medium underline cursor-pointer md:text-lg text-brand-gray-100 underline-offset-4"
       >
         Usuń
       </button>

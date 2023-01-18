@@ -99,13 +99,13 @@ const UserSettings: NextPage = () => {
       </Head>
       <main>
         <TopMenu />
-        <div className="flex flex-col gap-8 px-4 md:flex-row md:px-8 lg:px-36">
+        <div className="flex flex-col gap-8 px-4 xl:flex-row md:px-8 lg:px-36">
           <div className="pt-4 ">
             <UserMenu />
           </div>
-          <div className="w-full p-8 lg:w-2/4 bg-brand-gray-300 rounded-2xl">
+          <div className="w-full p-6 md:p-8 xl:w-7/12 bg-brand-gray-300 rounded-2xl">
             <div className="flex items-start justify-between mb-6">
-              <h1 className="text-2xl font-semibold text-brand-gray-100">
+              <h1 className="text-base font-semibold md:text-2xl text-brand-gray-100">
                 Dane osobowe
               </h1>
             </div>
@@ -121,21 +121,21 @@ const UserSettings: NextPage = () => {
                   onSubmit={(e) => handleSubmit(e, 'Name')}
                   className="flex flex-col gap-6"
                 >
-                  <div className="flex gap-4">
+                  <div className="flex gap-2 md:gap-4">
                     <Input
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                       tabIndex={-1}
                       placeholder="Imie"
-                      size={14}
+                      className="md:w-[200px] w-[140px]"
                       required
                     />
                     <Input
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                       tabIndex={-1}
-                      size={14}
                       placeholder="Nazwisko"
+                      className="md:w-[200px] w-[140px]"
                       required
                     />
                   </div>
@@ -145,7 +145,7 @@ const UserSettings: NextPage = () => {
                       disabled={loading}
                       tabIndex={-1}
                       type="submit"
-                      className="w-1/3"
+                      className="w-7/12 md:w-1/3"
                     >
                       Zapisz
                     </Button>
@@ -177,6 +177,7 @@ const UserSettings: NextPage = () => {
                       maxLength={9}
                       required
                       placeholder="Telefon"
+                      className="md:w-[200px] w-[180px]"
                     />
                   </div>
                   {error && <div className="text-brand-red">{error}</div>}
@@ -185,7 +186,7 @@ const UserSettings: NextPage = () => {
                       disabled={loading}
                       tabIndex={-1}
                       type="submit"
-                      className="w-1/3"
+                      className="w-7/12 md:w-1/3"
                     >
                       Zapisz
                     </Button>
@@ -207,6 +208,7 @@ const UserSettings: NextPage = () => {
                       onChange={(e) => setLicense(e.target.value)}
                       tabIndex={-1}
                       placeholder="Prawo jazdy"
+                      className="md:w-[200px] w-[180px]"
                       required
                     />
                   </div>
@@ -216,7 +218,7 @@ const UserSettings: NextPage = () => {
                       disabled={loading}
                       tabIndex={-1}
                       type="submit"
-                      className="w-1/3"
+                      className="w-7/12 md:w-1/3"
                     >
                       Zapisz
                     </Button>
@@ -239,6 +241,7 @@ const UserSettings: NextPage = () => {
                       max="2005-01-01"
                       type="date"
                       tabIndex={-1}
+                      className="md:w-[200px] w-[180px]"
                       required
                     />
                   </div>
@@ -248,7 +251,7 @@ const UserSettings: NextPage = () => {
                       disabled={loading}
                       tabIndex={-1}
                       type="submit"
-                      className="w-1/3"
+                      className="w-7/12 md:w-1/3"
                     >
                       Zapisz
                     </Button>
