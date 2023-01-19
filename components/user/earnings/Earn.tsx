@@ -10,7 +10,6 @@ interface EarnProps {
 
 const Earn: FC<EarnProps> = ({ dateFrom, dateTo, price, make, model }) => {
   const convertToTextMonth = (month: number) => {
-    console.log(month)
     switch (month) {
       case 0: {
         return 'Styczeń'
@@ -53,7 +52,6 @@ const Earn: FC<EarnProps> = ({ dateFrom, dateTo, price, make, model }) => {
       }
     }
   }
-  console.log(new Date(dateTo))
   return (
     <div className="flex items-center justify-between p-4 md:p-6 bg-brand-gray-400 rounded-2xl">
       <div className="flex items-center gap-4">
