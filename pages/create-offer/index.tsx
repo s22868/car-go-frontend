@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Spinner, Input, Button, TopMenu } from '@components/shared-components'
 import classNames from 'classnames'
+import PickMap from '@components/home/create/PickMap'
 
 const offerFields: Partial<CarOfferReq> = {
   city: 'Gdansk',
@@ -45,6 +46,7 @@ const CreateOffer: NextPage = () => {
     features: [],
     fuel_type: FuelType.DIESEL,
   })
+  const [point, setPoint] = useState<{ lat: number; lng: number }>()
   const [loading, setLoading] = useState(false)
   const [selectedFile, setSelectedFile] = useState<File>()
   const [error, setError] = useState('')
@@ -63,6 +65,10 @@ const CreateOffer: NextPage = () => {
       const token = 'Bearer ' + localStorage.getItem('cargo_token')!
       const res = await DefaultService.postOffersAdd(token, {
         ...(offerData as CarOfferReq),
+        point:
+          point?.lat && point?.lng
+            ? { lat: point?.lat.toString(), lon: point?.lng?.toString() }
+            : undefined,
       })
 
       await DefaultService.addPictures(res.id, token, {
@@ -192,7 +198,9 @@ const CreateOffer: NextPage = () => {
                   }
                 >
                   {fuels.map((fuel) => (
-                    <option value={fuel}>{fuel}</option>
+                    <option key={fuel} value={fuel}>
+                      {fuel}
+                    </option>
                   ))}
                 </Select>
               </div>
@@ -204,6 +212,7 @@ const CreateOffer: NextPage = () => {
                   <div className="flex flex-wrap gap-2 mt-4 md:gap-4">
                     {features.map(({ name, value }) => (
                       <div
+                        key={value}
                         onClick={() => handleFeatures(value)}
                         className={classNames(
                           'border p-4 rounded-xl cursor-pointer text-sm md:text-base',
@@ -264,6 +273,9 @@ const CreateOffer: NextPage = () => {
                     }))
                   }
                 />
+              </div>
+              <div className="w-full h-[600px] hidden md:block mt-4 rounded-xl overflow-hidden">
+                <PickMap setPoint={setPoint} />
               </div>
             </div>
             <div className="flex justify-center mt-4 md:mt-6">
