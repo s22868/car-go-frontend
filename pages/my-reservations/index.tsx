@@ -23,10 +23,10 @@ const MyReservations: NextPage = () => {
       return
     }
     const authorization = 'Bearer ' + token
-    DefaultService.getOwnersReservations(authorization).then((res) => {
+    DefaultService.geUserReservations(authorization).then((res) => {
       setReservations(res)
       setLoading(false)
-    })
+    }).catch(err => console.log(err))
   }, [user])
 
   useEffect(() => {
@@ -55,14 +55,14 @@ const MyReservations: NextPage = () => {
             </div>
             <div className="flex flex-col gap-4">
               {loading && <Spinner />}
-              {reservations?.map((item) => (
+              {reservations?.map((reservation) => (
                 <ReservationItem
-                  ownerId={item.renter_id}
-                  price={item.total_price}
-                  make={item.make}
-                  model={item.model}
-                  dateFrom={item.from}
-                  dateTo={item.to}
+                  ownerId={reservation.renter_id}
+                  price={reservation.total_price}
+                  make={reservation.make}
+                  model={reservation.model}
+                  dateFrom={reservation.from}
+                  dateTo={reservation.to}
                 />
               ))}
             </div>

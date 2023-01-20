@@ -1,12 +1,16 @@
-import { CarOfferRes, DefaultService, Insurance } from '@openapi'
+import { CarOfferRes, DefaultService, Insurance, UserInfo } from '@openapi'
 import NextImage from 'next/image'
 import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from 'next'
 import Head from 'next/head'
-import React, { FormEvent, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import CarStats from '@components/offer/CarStats'
 import { Input, Button, TopMenu, Spinner } from '@components/shared-components'
 import classNames from 'classnames'
 import { UseUser } from 'hooks/useUser'
+import Modal from '@components/shared-components/modal/Modal'
+import daysBetween from 'helpers/daysBetween'
+import { useRouter } from 'next/router'
+import getInsurancePrice from 'helpers/getInsurancePrice'
 
 const Offer: NextPage<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -14,16 +18,34 @@ const Offer: NextPage<
   const title = `Car-Go ${
     carOffer && ` - ${carOffer.city} - ${carOffer.make} ${carOffer.model}`
   }`
+  const router = useRouter()
   const { user, getUser } = UseUser()
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [dateFrom, setDateFrom] = useState('')
   const [dateTo, setDateTo] = useState('')
   const [insurance, setInsurance] = useState<Insurance>(Insurance.CHEAP)
+  const [owner, setOwner] = useState<UserInfo>()
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  useEffect(() => {
+    const token = localStorage.getItem('cargo_token')
+    if (!token) {
+      return
+    }
+    const authorization = 'Bearer ' + token
+    DefaultService.getUserById(carOffer.owner_id, authorization)
+      .then((res) => setOwner(res))
+      .catch()
+  }, [carOffer.owner_id])
+
+  const days = daysBetween(new Date(dateTo), new Date(dateFrom))
+
+  const price = days * carOffer.price_per_day + getInsurancePrice(insurance)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    if (Number(user?.balance) < carOffer.price_per_day) {
+    if (Number(user?.balance) < price) {
       return setError('Nie masz wystarczająco środków na koncie')
     }
     setLoading(true)
@@ -37,6 +59,7 @@ const Offer: NextPage<
         insurance,
       })
       await getUser?.()
+      setIsModalOpen(true)
     } catch {
       setError('Coś poszło nie tak, spróbuj ponownie za chwile')
     } finally {
@@ -46,6 +69,7 @@ const Offer: NextPage<
   if (!carOffer) {
     return null
   }
+
   return (
     <div className="w-full h-full min-h-screen p-4 md:p-8 bg-brand-gray-400">
       <Head>
@@ -122,6 +146,7 @@ const Offer: NextPage<
                 onChange={(e) => setDateFrom(e.target.value)}
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
+                max={dateTo}
                 type="text"
                 required
               />
@@ -130,6 +155,7 @@ const Offer: NextPage<
                 dark
                 placeholder="Data zwrotu"
                 value={dateTo}
+                min={dateFrom}
                 onChange={(e) => setDateTo(e.target.value)}
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
@@ -174,14 +200,58 @@ const Offer: NextPage<
                   </div>
                 </div>
               </div>
-              {error && <div className="text-brand-red">{error}</div>}
+              {dateFrom && dateTo && (
+                <div className="flex justify-between text-xl font-semibold text-brand-gray-100">
+                  <div>
+                    Cena za {days} {days === 1 ? 'dzień' : 'dni'}
+                  </div>
+                  <div>{price} PLN</div>
+                </div>
+              )}
+              {error && <p className="flex w-1/2 text-brand-red">{error}</p>}
               <Button disabled={loading} type="submit">
                 {loading ? <Spinner /> : 'Zarezerwuj'}
               </Button>
+              {owner && (
+                <div className="flex flex-col">
+                  <p className="text-brand-gray-100">
+                    Wynajmujesz od: {owner?.first_name} {owner?.last_name?.[0]}.
+                  </p>
+                  <p className="text-brand-gray-200">{owner?.email}</p>
+                </div>
+              )}
             </form>
           </div>
         </div>
       </main>
+      <Modal
+        title="Rezerwacja udana"
+        onClose={() => setIsModalOpen(false)}
+        show={isModalOpen}
+      >
+        <div className="mt-4">
+          <div className="text-brand-gray-100">
+            Udało się zarezerwować {carOffer.make} {carOffer.model}
+          </div>
+          <div className="text-brand-gray-200">Cena: {price}</div>
+          <div className="flex gap-4 mt-4">
+            <Button
+              className="w-full"
+              type="button"
+              onClick={() => setIsModalOpen(false)}
+            >
+              Zamknij
+            </Button>
+            <Button
+              type="button"
+              onClick={() => router.push('/my-reservations')}
+              className="w-full"
+            >
+              Moje rezerwacje
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   )
 }
