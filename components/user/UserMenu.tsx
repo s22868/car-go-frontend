@@ -37,6 +37,18 @@ const UserMenu: FC = () => {
           Moje ogłoszenia
         </li>
       </Link>
+      <Link href="/my-reservations">
+        <li
+          className={classNames(
+            'flex items-center h-12 px-4 text-base font-semibold text-white transition-colors duration-300 cursor-pointer rounded-xl hover:bg-brand-red',
+            {
+              'bg-brand-red': router.pathname === '/my-reservations',
+            }
+          )}
+        >
+          Moje rezerwacje
+        </li>
+      </Link>
       <Link href="/earnings">
         <li
           className={classNames(
