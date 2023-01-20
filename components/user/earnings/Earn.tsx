@@ -1,3 +1,4 @@
+import convertToTextMonth from 'helpers/convertToTextMonth'
 import React, { FC } from 'react'
 
 interface EarnProps {
@@ -9,49 +10,6 @@ interface EarnProps {
 }
 
 const Earn: FC<EarnProps> = ({ dateFrom, dateTo, price, make, model }) => {
-  const convertToTextMonth = (month: number) => {
-    switch (month) {
-      case 0: {
-        return 'Styczeń'
-      }
-      case 1: {
-        return 'Luty'
-      }
-      case 2: {
-        return 'Marzec'
-      }
-      case 3: {
-        return 'Kwiecień'
-      }
-      case 4: {
-        return 'Maj'
-      }
-      case 5: {
-        return 'Czerwiec'
-      }
-      case 6: {
-        return 'Lipiec'
-      }
-      case 7: {
-        return 'Sierpień'
-      }
-      case 8: {
-        return 'Wrzesień'
-      }
-      case 9: {
-        return 'Październik'
-      }
-      case 10: {
-        return 'Listopad'
-      }
-      case 11: {
-        return 'Grudzień'
-      }
-      default: {
-        return 'Styczeń'
-      }
-    }
-  }
   return (
     <div className="flex items-center justify-between p-4 md:p-6 bg-brand-gray-400 rounded-2xl">
       <div className="flex items-center gap-4">
