@@ -1,5 +1,6 @@
 import { DefaultService, UserInfo } from '@openapi'
 import convertToTextMonth from 'helpers/convertToTextMonth'
+import daysBetween from 'helpers/daysBetween'
 import React, { FC, useEffect, useState } from 'react'
 
 interface ReservationProps {
@@ -32,7 +33,7 @@ const ReservationItem: FC<ReservationProps> = ({
     )
   }, [ownerId])
 
-  const days = new Date(dateTo).getDate() - new Date(dateFrom).getDate()
+  const days = daysBetween(new Date(dateTo), new Date(dateFrom))
 
   return (
     <a

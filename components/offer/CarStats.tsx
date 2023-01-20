@@ -46,7 +46,7 @@ const CarStats: FC<CarStatsProps> = ({ carOffer }) => {
       </div>
       <div className="flex flex-col">
         <span className="text-sm font-medium md:text-base text-brand-gray-200">
-          Dodatki
+          Wyposażenie
         </span>
         <div className="flex flex-wrap gap-2 mt-2 md:gap-4">
           {carOffer.features.map((val) => (
