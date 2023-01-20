@@ -23,10 +23,12 @@ const MyReservations: NextPage = () => {
       return
     }
     const authorization = 'Bearer ' + token
-    DefaultService.geUserReservations(authorization).then((res) => {
-      setReservations(res)
-      setLoading(false)
-    }).catch(err => console.log(err))
+    DefaultService.geUserReservations(authorization)
+      .then((res) => {
+        setReservations(res)
+        setLoading(false)
+      })
+      .catch((err) => console.log(err))
   }, [user])
 
   useEffect(() => {
@@ -34,6 +36,7 @@ const MyReservations: NextPage = () => {
       router.push('/login')
     }
   })
+  console.log(reservations)
 
   return (
     <div className="w-full h-full min-h-screen p-4 md:p-8 bg-brand-gray-400">
@@ -57,6 +60,7 @@ const MyReservations: NextPage = () => {
               {loading && <Spinner />}
               {reservations?.map((reservation) => (
                 <ReservationItem
+                  key={reservation.from + reservation.model + reservation.to}
                   ownerId={reservation.owner_id}
                   price={reservation.total_price}
                   make={reservation.make}
