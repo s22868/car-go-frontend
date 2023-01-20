@@ -55,11 +55,11 @@ const ReservationItem: FC<ReservationProps> = ({
           {`${new Date(dateTo).getDate()} ${convertToTextMonth(
             new Date(dateTo).getMonth()
           )}`}{' '}
-          <div className="text-xs">
+          <div className="flex gap-1 text-xs">
             Telefon do właściciela{' '}
-            <a className="underline" href={'tel:+48' + owner?.phone}>
+            <p className="underline">
               {owner?.phone}
-            </a>
+            </p>
           </div>
         </div>
       </div>
