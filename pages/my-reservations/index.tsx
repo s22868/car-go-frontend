@@ -36,7 +36,6 @@ const MyReservations: NextPage = () => {
       router.push('/login')
     }
   })
-  console.log(reservations)
 
   return (
     <div className="w-full h-full min-h-screen p-4 md:p-8 bg-brand-gray-400">
