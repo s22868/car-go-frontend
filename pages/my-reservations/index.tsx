@@ -57,7 +57,7 @@ const MyReservations: NextPage = () => {
               {loading && <Spinner />}
               {reservations?.map((reservation) => (
                 <ReservationItem
-                  ownerId={reservation.renter_id}
+                  ownerId={reservation.owner_id}
                   price={reservation.total_price}
                   make={reservation.make}
                   model={reservation.model}
